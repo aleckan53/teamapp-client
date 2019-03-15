@@ -1,0 +1,28 @@
+.Project {
+  padding: 2% 5%;
+}
+
+.Project__card {
+  height: 200px;
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0px 5px 20px -3px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  position: relative;
+}
+
+.Project__card > h3, .Project__card > p {
+  padding: 10px;
+  color: white;
+  margin: 0;
+}
+
+/* .Project__card-description {
+  position: absolute;
+  padding: 10px;
+  color: white;
+  height: 80%;
+  width: 100%;
+  border-radius: 10px;
+  box-sizing: border-box;
+} */

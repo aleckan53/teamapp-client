@@ -1,10 +1,13 @@
 import React from 'react'
-import { Project } from '../Project/Project'
+import { ProjectCard } from '../Project/ProjectCard'
 
 export const ProjectsList = props => {
-
   return <div className="ProjectsList">
-    List of projects
-    <Project/>
+    <header>
+      <h2>Projetcs</h2> 
+    </header>
+    {props.projects.map(project=>{
+      return <ProjectCard {...project}/>
+    })}
   </div>
 }

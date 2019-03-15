@@ -1,0 +1,36 @@
+.Search form {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 5% 2%;
+}
+
+.Search fieldset {
+  border: none;
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.Search .bar {
+  display: flex;
+  align-items: center;
+}
+
+.Search input[type="text"] {
+  box-sizing: border-box;
+  width: 80%;
+  height: 3vh;
+  font-size: 1rem;
+  padding: 0;
+  border-collapse: collapse;
+  border: 1px solid rgba(169,169,169,0.3);
+}
+
+.Search input[type="submit"] {
+  padding: 0;
+  box-sizing: border-box;
+  width: 20%;
+  height: 3vh;
+  font-size: 0.7rem;
+  border: 1px solid rgba(169,169,169,0.3);
+  border-left: none;
+}

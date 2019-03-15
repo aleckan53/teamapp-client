@@ -1,0 +1,7 @@
+.Notifications__list {
+  list-style: none;
+}
+
+.Notifications__list > li::after {
+  
+}
