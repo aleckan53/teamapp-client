@@ -1,20 +1,21 @@
 import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
 import config from './config'
- 
+import AppContext from './AppContext' 
+
 import './App.css'
 import { NavBar } from './NavBar/NavBar'
 import { Account } from './Account/Account'
 import { Notifications } from './Notifications/Notifications'
-import { ProjectsList } from './ProjectsList/ProjectsList'
+import { ProjectsList } from './Project/ProjectsList'
 import { Search } from './Search/Search'
-import { ProjectCard } from './Project/ProjectCard'
 
 
 class App extends Component {
   constructor(props){
     super(props)
     this.state = {
+      ready: false,
       owner: {
         id: "",
         firstName: "",
@@ -33,10 +34,12 @@ class App extends Component {
     }
   }
 
+  static contextType = AppContext
+
   componentDidMount(){
     fetch(`${config.API_ENDPOINT}/start`)
       .then(res=> res.json())
-      .then(res=> this.setState({...res}))
+      .then(res=> this.setState({...res, ready: true}))
       .catch(err=> Promise.reject(err.message))
   }
 
@@ -44,15 +47,23 @@ class App extends Component {
     const { owner, user_projects } = this.state
     return (
       <div className="App">
-        <nav>
-          <NavBar/>
-        </nav>
-        <main>
-          <Route path='/account' render={props=><Account {...props} owner={owner}/>}/>
-          {/* <Route path='/notifications' render={props=><Notifications {...props} notifications={notifications}/>}/> */}
-          <Route path='/projects' render={props=><ProjectsList {...props} projects={user_projects}/>}/>
-          <Route path='/search' render={props=><Search {...props}/>}/>
-        </main>
+      {
+        this.state.ready 
+          ? <>
+            <AppContext.Provider value={{owner_id: this.state.owner.id}}>
+              <nav>
+                <NavBar/>
+              </nav>
+              <main>
+                <Route path='/account' render={props=><Account {...props} owner={owner}/>}/>
+                <Route path='/notifications' render={props=><Notifications {...props} ownerId={owner.id}/>}/>
+                <Route path='/projects' render={props=><ProjectsList {...props} projects={user_projects}/>}/>
+                <Route path='/search' render={props=><Search {...props}/>}/>
+              </main>
+            </AppContext.Provider>
+          </>
+          : ''
+      }
       </div>
     )
   }

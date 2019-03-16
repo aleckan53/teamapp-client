@@ -2,7 +2,7 @@ import React from 'react'
 import './Account.css'
 
 export const Account = props => {
-  
+
   const owner = props.owner
 
   return <div className="Account">
@@ -13,8 +13,8 @@ export const Account = props => {
         backgroundRepeat: "no-repeat",
         backgroundImage: `url(${owner.avatar})`
       }}
-      className="hero">
-      <span className="name">{`${owner.firstName} ${owner.lastName}`}</span>
+      className="Account__hero">
+      <span className="Account__name">{`${owner.firstName} ${owner.lastName}`}</span>
     </div>
     <header>
       <h2>Account</h2>
