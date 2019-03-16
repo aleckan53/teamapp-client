@@ -16,11 +16,13 @@ export const Account = props => {
       className="Account__hero">
       <span className="Account__name">{`${owner.firstName} ${owner.lastName}`}</span>
     </div>
-    <header>
-      <h2>Account</h2>
-    </header>
-    <div>
-      <button>Log out</button>
+    <div className="Account__container">
+      <header>
+        <h2>Account</h2>
+      </header>
+      <div>
+        <button>Log out</button>
+      </div>
     </div>
   </div>
 }

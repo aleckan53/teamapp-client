@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './Notifications.css'
 import config from '../config'
-
+ 
 export const Notifications = props =>{
 
   const [data, setData] = useState({
@@ -18,7 +18,7 @@ export const Notifications = props =>{
       .then(res=> setData({notifications: res}))
       .catch(err=> console.log(err))
   }, [])
-  
+
   return <div className="Notifications">
     <header>
       <h2>Notifications</h2>
@@ -29,8 +29,11 @@ export const Notifications = props =>{
           const date = new Date(notf.date_created).toLocaleString('en-Us', { timeZone: 'UTC' })
           return (
             <li key={i}>
+              <div>
+                <span className="__icon"></span>
+                <span>{notf.text}</span>
+              </div>
               <span>{date}</span>
-              <span>{notf.text}</span>
             </li>
           )
         })

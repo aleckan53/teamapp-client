@@ -1,3 +1,8 @@
+.Account__container {
+  padding: 0 5% 2%;
+  box-sizing: border-box;
+}
+
 .Account__hero{
   box-sizing: border-box;
   position: relative;
@@ -6,6 +11,7 @@
 }
 
 .Account__name {
+  padding: 0 5% 2%;
   position: absolute;
   z-index: 3;
   bottom: 3%;
