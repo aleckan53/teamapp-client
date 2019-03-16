@@ -15,33 +15,43 @@ class App extends Component {
   constructor(props){
     super(props)
     this.state = {
-      projects: [],
-      notifications: [],
+      owner: {
+        id: "",
+        firstName: "",
+        lastName: "",
+        img: "",
+        email: "",
+      },
+      user_projects: [
+        {
+          id: "",
+          title: "",
+          description: "",
+          img: ""
+        }      
+      ]
     }
   }
 
   componentDidMount(){
-    fetch(`${config.API_ENDPOINT}/owner`)
+    fetch(`${config.API_ENDPOINT}/start`)
       .then(res=> res.json())
-      .then(res=> this.setState({
-        ...res
-      }))
+      .then(res=> this.setState({...res}))
       .catch(err=> Promise.reject(err.message))
   }
 
   render() {
-    const { owner, notifications, projects } = this.state
+    const { owner, user_projects } = this.state
     return (
       <div className="App">
         <nav>
           <NavBar/>
         </nav>
         <main>
-          <Route path='/account' render={props=><Account {...props} {...owner}/>}/>
-          <Route path='/notifications' render={props=><Notifications {...props} notifications={notifications}/>}/>
-          <Route path='/projects' render={props=><ProjectsList {...props} projects={projects}/>}/>
+          <Route path='/account' render={props=><Account {...props} owner={owner}/>}/>
+          {/* <Route path='/notifications' render={props=><Notifications {...props} notifications={notifications}/>}/> */}
+          <Route path='/projects' render={props=><ProjectsList {...props} projects={user_projects}/>}/>
           <Route path='/search' render={props=><Search {...props}/>}/>
-          <Route path='/project-:id' render={props=><ProjectCard {...props} projects={projects}/>}/>
         </main>
       </div>
     )

@@ -1,5 +1,5 @@
-.Project {
-  padding: 2% 5%;
+.Project__link {
+  text-decoration: none;
 }
 
 .Project__card {

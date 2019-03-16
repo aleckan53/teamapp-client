@@ -1,0 +1,8 @@
+.ProjectsList {
+  padding: 0 5% 2%;
+  box-sizing: border-box;
+}
+
+.ProjectsList .Project {
+  margin: 2rem 0;
+}

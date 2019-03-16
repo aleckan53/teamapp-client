@@ -1,24 +1,44 @@
+.Search {
+  padding: 0 5% 2%;
+  box-sizing: border-box;
+}
+
 .Search form {
   width: 100%;
   box-sizing: border-box;
-  padding: 0 5% 2%;
+}
+
+.Search__pagination {
+  display: flex;
+  justify-content: space-between;
+}
+
+.Search__pagination > * {
+  margin: 2rem 0 0;
+  font-size: 0.8rem;
+  border: 1px solid rgba(169,169,169,0.3);
+  height: 2rem;
+  box-sizing: border-box;
 }
 
 .Search fieldset {
   border: none;
   box-sizing: border-box;
   padding: 0;
+  margin: 0;
 }
 
 .Search .bar {
   display: flex;
   align-items: center;
+  box-sizing: border-box;
+  width: 100%;
 }
 
 .Search input[type="text"] {
   box-sizing: border-box;
-  width: 80%;
   height: 3vh;
+  width: 100%;
   font-size: 1rem;
   padding: 0;
   border-collapse: collapse;
@@ -28,9 +48,13 @@
 .Search input[type="submit"] {
   padding: 0;
   box-sizing: border-box;
-  width: 20%;
   height: 3vh;
+  width: 20%;
   font-size: 0.7rem;
   border: 1px solid rgba(169,169,169,0.3);
   border-left: none;
+}
+
+.Search .Project {
+  margin: 2rem 0;
 }
