@@ -61,5 +61,20 @@
 }
 
 .Search .Project {
-  margin: 2rem 0;
+  margin: 0 0 2rem;
+}
+
+#scrolableInSearch {
+  margin-top: 2rem;
+  height: 73vh;
+  overflow: scroll;
+  position: relative;
+}
+
+#scrolableInSearch::-webkit-scrollbar{
+  width: 0px;
+}
+
+.bot-msg{
+  text-align: center;
 }
