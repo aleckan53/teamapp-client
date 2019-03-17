@@ -13,6 +13,10 @@ export const Search = props => {
     totalPages: 1,
   })
 
+  const [rerender, setRerender] = useState(false)
+
+  const [searchTerm, setSearchTerm] = useState()
+
   useEffect(()=>{
     fetch(`${config.API_ENDPOINT}/search/featured?page=${data.currentPage}`)
       .then(res=> res.json())
@@ -24,10 +28,18 @@ export const Search = props => {
           totalPages: Math.ceil(res.count/7),
         })
       })
-  }, [data.currentPage])
+  }, [rerender])
 
   const handleSubmit = e => {
     e.preventDefault();
+    fetch(`${config.API_ENDPOINT}/search?searchTerm=${searchTerm}`)
+      .then(res=> res.json())
+      .then(res=> {
+        setData({
+          projects: res
+        })
+        scrollToTop()
+      })
   }
 
   const setNextPage = () => {
@@ -36,7 +48,9 @@ export const Search = props => {
       : setData({...data, currentPage: data.currentPage+1})
   }
 
-  console.log(data)
+  const scrollToTop = (v) => {
+    document.getElementById('scrolableInSearch').scrollTop = 0
+  }
 
   return <div className="Search">
     <header>
@@ -46,7 +60,7 @@ export const Search = props => {
       <form onSubmit={e=>handleSubmit(e)}>
         <fieldset>
           <div className="bar">
-            <input type="text"/>
+            <input type="text" onChange={(e)=>setSearchTerm(e.currentTarget.value)}/>
             <input type="submit" value="Search"/>
           </div>
         </fieldset>
@@ -54,12 +68,16 @@ export const Search = props => {
     </div>
     <div id="scrolableInSearch">
       <InfiniteScroll
+        // onScroll={e=>console.log(e.target.scrollTop)}
         scrollableTarget="scrolableInSearch"
         dataLength={data.projects.length}
-        next={()=>setNextPage()}
+        next={()=>{
+          setNextPage()
+          setRerender(true)
+        }}
         hasMore={data.projects.length<data.totalCount}
-        loader={<h4>Loading...</h4>}
-        endMessage={<p className="bot-msg">That's it! You've reached the bottom.</p>}
+        loader={<p className="bot-msg">Loading...</p>}
+        // endMessage={<hr/>}
         >
         {data.projects.map((project, i)=>{
           return <ProjectCard key={i} {...project}/>
