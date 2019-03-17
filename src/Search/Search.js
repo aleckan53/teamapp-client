@@ -80,7 +80,7 @@ export const Search = props => {
         // endMessage={<hr/>}
         >
         {data.projects.map((project, i)=>{
-          return <ProjectCard key={i} {...project}/>
+          return <ProjectCard key={i} {...project} details={project}/>
         })}
       </InfiniteScroll>
     </div>
@@ -91,9 +91,3 @@ export const Search = props => {
 
 
 
-{/* <div>
-<label htmlFor="Projects">Projects</label>
-<input id="Projects" type="radio" name="searchType" value="Projects" checked/>
-<label htmlFor="Users">Users</label>
-<input id="Users" type="radio" name="searchType" value="Users"/>
-</div> */}
