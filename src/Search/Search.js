@@ -2,90 +2,87 @@ import React, { useState, useEffect } from 'react'
 import config from '../config'
 import './Search.css'
 
-import { ProjectCard } from '../Project/ProjectCard'
+import ProjectCard from '../Project/ProjectCard'
 import InfiniteScroll from 'react-infinite-scroll-component'
 
-export const Search = props => {
-  const [data, setData] = useState({
-    projects: [],
-    totalCount: 0,
-    currentPage: 1,
-    totalPages: 1,
-  })
-
-  const [rerender, setRerender] = useState(false)
-
-  const [searchTerm, setSearchTerm] = useState()
+const Search = props => {
+  const [projects, setProjects] = useState([])
+  const [totalProjects, setTotalProjects] = useState()
+  const [currentPage, setCurrentPage] = useState(1)
+  const [searchTerm, setSearchTerm] = useState('')
 
   useEffect(()=>{
-    fetch(`${config.API_ENDPOINT}/search/featured?page=${data.currentPage}`)
-      .then(res=> res.json())
-      .then(res=> {
-        setData({
-          projects: [...data.projects, ...res.projects],
-          totalCount: Number(res.count),
-          currentPage: data.currentPage,
-          totalPages: Math.ceil(res.count/7),
-        })
-      })
-  }, [rerender])
+    scrollToTop()
+    setCurrentPage(1)
+    loadProjects(searchTerm)
+  }, [searchTerm])
 
-  const handleSubmit = e => {
-    e.preventDefault();
-    fetch(`${config.API_ENDPOINT}/search?searchTerm=${searchTerm}`)
-      .then(res=> res.json())
-      .then(res=> {
-        setData({
-          projects: res
-        })
-        scrollToTop()
-      })
+  useEffect(()=>{
+    loadProjects(searchTerm, currentPage)
+  }, [currentPage])
+
+
+  const loadProjects = (term="", page=1) =>{
+    fetch(`${config.API_ENDPOINT}/projects?term=${term}&page=${page}`)
+    .then(res=> res.json())
+    .then(res=> {
+      if(page>1) {
+        setProjects([...projects, ...res.projects])
+      } else {
+        setProjects(res.projects)
+      }
+      setTotalProjects(res.count)
+    })
   }
 
-  const setNextPage = () => {
-    return data.currentPage === data.totalPages
-      ? data.currentPage
-      : setData({...data, currentPage: data.currentPage+1})
+  const scrollToTop = () => {
+    document.getElementById('scrollableInSearch').scrollTop = 0
   }
 
-  const scrollToTop = (v) => {
-    document.getElementById('scrolableInSearch').scrollTop = 0
+  const nextPage = () => {
+    return currentPage === Math.ceil(totalProjects/5)
+      ? currentPage
+      : setCurrentPage(currentPage+1)
   }
 
-  return <div className="Search">
+  return <section className="Search">
     <header>
-      <h2>Search</h2>
+      <h1>Search</h1>
     </header>
     <div>
-      <form onSubmit={e=>handleSubmit(e)}>
+      <form onSubmit={(e)=>{
+        e.preventDefault()
+        setCurrentPage(1)
+        loadProjects(searchTerm, currentPage)
+        console.log(currentPage)
+      }}>
         <fieldset>
           <div className="bar">
-            <input type="text" onChange={(e)=>setSearchTerm(e.currentTarget.value)}/>
-            <input type="submit" value="Search"/>
+            <input 
+              type="text" 
+              onChange={(e)=>setSearchTerm(e.currentTarget.value)} 
+              required/>
+            {/* <input type="submit" value="Search"/> */}
           </div>
         </fieldset>
       </form>
     </div>
-    <div id="scrolableInSearch">
+    <div id="scrollableInSearch">
       <InfiniteScroll
-        // onScroll={e=>console.log(e.target.scrollTop)}
-        scrollableTarget="scrolableInSearch"
-        dataLength={data.projects.length}
-        next={()=>{
-          setNextPage()
-          setRerender(true)
-        }}
-        hasMore={data.projects.length<data.totalCount}
+        next={()=> nextPage()}
+        scrollableTarget="scrollableInSearch"
+        dataLength={projects.length}
+        hasMore={projects.length<totalProjects}
         loader={<p className="bot-msg">Loading...</p>}
-        // endMessage={<hr/>}
-        >
-        {data.projects.map((project, i)=>{
-          return <ProjectCard key={i} {...project} details={project}/>
-        })}
+        endMessage={totalProjects > 5 ? <p>That's it for now.</p> : ''}>
+        {projects.map((p,i)=> <ProjectCard {...p}key={i} details={p}/>)}
       </InfiniteScroll>
     </div>
-  </div>
+  </section>
+
 }
+
+export default Search
 
 
 

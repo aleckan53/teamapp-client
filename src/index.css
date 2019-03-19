@@ -12,3 +12,20 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+:root{
+  --main-color: #ff2e63;
+}
+
+section {
+  margin-top: 1.5rem;
+  padding: 0 5% 2%;
+  box-sizing: border-box;
+}
+
+section h1 {
+  font-size: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+

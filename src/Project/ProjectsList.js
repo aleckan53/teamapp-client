@@ -1,15 +1,24 @@
 import React from 'react'
 import './ProjectsList.css'
+import { Link } from 'react-router-dom'
+import { IoMdAddCircle } from 'react-icons/io'
 
-import { ProjectCard } from './ProjectCard'
-
-export const ProjectsList = props => {
-  return <div className="ProjectsList">
+import ProjectCard from './ProjectCard'
+ 
+const ProjectsList = props => {
+  return <section className="ProjectsList">
     <header>
-      <h2>Projetcs</h2> 
+      <h1>Projetcs</h1>
+      <Link to="/add-project" className="add"><IoMdAddCircle/></Link>
     </header>
-    {props.projects.map((project, i)=>{
-      return <ProjectCard key={i} {...project} details={project}/>
-    })}
-  </div>
+    <div className="ProjectsList__scrollable">
+      {props.projects.map((project, i)=>
+        <ProjectCard 
+          key={i} 
+          {...project} 
+          details={project}/>)}
+    </div>
+  </section>
 }
+
+export default ProjectsList

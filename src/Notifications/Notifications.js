@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import './Notifications.css'
 import config from '../config'
+
+import { IoMdTrash } from 'react-icons/io'
  
-export const Notifications = props =>{
+const Notifications = props =>{
 
   const [data, setData] = useState({
     notifications: [{
@@ -19,9 +21,10 @@ export const Notifications = props =>{
       .catch(err=> console.log(err))
   }, [])
 
-  return <div className="Notifications">
+  return <section className="Notifications">
     <header>
-      <h2>Notifications</h2>
+      <h1>Notifications</h1>
+      <IoMdTrash/>
     </header>
     <ul className="Notifications__list">
       {
@@ -39,5 +42,7 @@ export const Notifications = props =>{
         })
       }
     </ul>
-  </div>
+  </section>
 }
+
+export default Notifications

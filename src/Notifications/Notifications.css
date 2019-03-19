@@ -1,9 +1,4 @@
-.Notifications {
-  box-sizing: border-box;
-  padding: 0 5% 2%;
-}
-
-.Notifications ul {
+ul {
   list-style: none;
   padding: 0;
 }
@@ -13,6 +8,20 @@
   width: 2rem;
   margin-right: 1rem;
 }
+
+.Notifications header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 1rem;
+}
+
+.Notifications svg {
+  height: 2rem;
+  width: 2rem;
+  fill: var(--main-color);
+}
+
 
 .Notifications__list li div {
   display: flex;

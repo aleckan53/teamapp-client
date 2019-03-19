@@ -1,29 +1,21 @@
 import React from 'react'
 import './Account.css'
 
-export const Account = props => {
+import Hero from '../Hero/Hero'
 
-  const owner = props.owner
+const Account = props => {
 
   return <div className="Account">
-    <div 
-      style={{
-        backgroundPosition: "center",
-        backgroundSize: `cover`,
-        backgroundRepeat: "no-repeat",
-        backgroundImage: `url(${owner.avatar})`
-      }}
-      className="Account__hero">
-      <span className="Account__name">{`${owner.firstName} ${owner.lastName}`}</span>
-    </div>
-    <div className="Account__container">
+    <Hero owner={props.owner}/>
+    <section className="Account__container">
       <header>
-        <h2>Account</h2>
+        <h1>Account</h1>
       </header>
       <div>
         <button>Log out</button>
       </div>
-    </div>
+    </section>
   </div>
 }
 
+export default Account

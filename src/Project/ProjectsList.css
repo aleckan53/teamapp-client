@@ -1,8 +1,29 @@
-.ProjectsList {
-  padding: 0 5% 2%;
-  box-sizing: border-box;
-}
-
 .ProjectsList .Project {
   margin: 2rem 0;
+}
+
+.ProjectsList__scrollable{
+  height: 800px;
+  overflow: scroll;
+}
+
+.ProjectsList__scrollable::-webkit-scrollbar{
+  width: 0px;
+}
+
+.ProjectsList header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 1rem;
+}
+
+.add{
+  text-decoration: none;
+}
+
+.add svg {
+  height: 2rem;
+  width: 2rem;
+  fill: var(--main-color);
 }

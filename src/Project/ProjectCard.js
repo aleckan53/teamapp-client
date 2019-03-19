@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom'
 import './ProjectCard.css'
 import AppContext from '../AppContext'
 
-export const ProjectCard = props => {
+const ProjectCard = props => {
 
   const context = useContext(AppContext)
+
   return <Link 
     onClick={()=>context.setCurrentProject(props.details)}
     className="Project__link" 
@@ -18,15 +19,16 @@ export const ProjectCard = props => {
           backgroundRepeat: "no-repeat",
           backgroundImage: 
             `linear-gradient(
-              rgba(0, 0, 0, 0.5),
-              rgba(0, 0, 0, 0.5)
+              rgba(0, 0, 0, 0.1),
+              rgba(0, 0, 0, 0.1)
             ),
             url(${props.img})`
         }}
         className="Project__card">
         <h3>{props.title}</h3>
-        <p>{props.description}</p>
       </div>
     </div>
   </Link>
 }
+
+export default ProjectCard
