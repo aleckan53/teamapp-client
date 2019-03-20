@@ -10,6 +10,10 @@
   padding: 0;
 }
 
+.ProjectService label {
+  font-weight: bold;
+}
+
 .ProjectService fieldset > div {
   display: flex;
   flex-direction: column;
@@ -26,14 +30,20 @@
   border-radius: 10px;
 }
 
-.ProjectService fieldset > input[type="submit"] {
+.ProjectService fieldset > input[type="submit"], 
+input[name="delete"] {
+  width: 100%;
   padding: 0;
   height: 30px;
-  background: none;
   border: 1px solid rgba(169,169,169,0.3);
   border-radius: 10px;
   font-size: 1rem;
+  font-weight: bold;
+}
 
+input[name="delete"] {
+  background: var(--main-color);
+  color: white;
 }
 
 .ProjectService fieldset textarea {
@@ -44,5 +54,4 @@
   font-size: 0.8rem;
   border: 1px solid rgba(169,169,169,0.3);
   border-radius: 10px;
-
 }

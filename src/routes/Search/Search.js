@@ -1,42 +1,47 @@
 import React, { useState, useEffect } from 'react'
-import config from '../config'
+import InfiniteScroll from 'react-infinite-scroll-component'
+import Loader from 'react-loader-spinner'
+import ProjectCard from '../../components/ProjectCard/ProjectCard'
+import ApiService from '../../services/api-service'
 import './Search.css'
 
-import ProjectCard from '../Project/ProjectCard'
-import InfiniteScroll from 'react-infinite-scroll-component'
 
 const Search = props => {
   const [projects, setProjects] = useState([])
   const [totalProjects, setTotalProjects] = useState()
   const [currentPage, setCurrentPage] = useState(1)
   const [searchTerm, setSearchTerm] = useState('')
+  const [showDots, setShowDots] = useState(false)
 
-  useEffect(()=>{
+  useEffect(() => {
+    if(searchTerm) {
+      setShowDots(true)
+    }
     scrollToTop()
     setCurrentPage(1)
     loadProjects(searchTerm)
+    setTimeout(() => setShowDots(false), 2000)
   }, [searchTerm])
 
-  useEffect(()=>{
+  useEffect(() => { 
     loadProjects(searchTerm, currentPage)
   }, [currentPage])
 
-
-  const loadProjects = (term="", page=1) =>{
-    fetch(`${config.API_ENDPOINT}/projects?term=${term}&page=${page}`)
-    .then(res=> res.json())
-    .then(res=> {
-      if(page>1) {
-        setProjects([...projects, ...res.projects])
-      } else {
-        setProjects(res.projects)
-      }
-      setTotalProjects(res.count)
-    })
+  const loadProjects = (term="", page=1) => {
+    ApiService.getAllProjects(term, page)
+      .then(res => {
+          page>1
+            ? setProjects([...projects, ...res.projects])
+            : setProjects(res.projects)
+        setTotalProjects(res.count)
+      })
   }
 
   const scrollToTop = () => {
-    document.getElementById('scrollableInSearch').scrollTop = 0
+    const element = document.getElementById('scrollableInSearch')
+
+    if (element) element.scrollTop = 0
+    
   }
 
   const nextPage = () => {
@@ -54,7 +59,6 @@ const Search = props => {
         e.preventDefault()
         setCurrentPage(1)
         loadProjects(searchTerm, currentPage)
-        console.log(currentPage)
       }}>
         <fieldset>
           <div className="bar">
@@ -62,7 +66,9 @@ const Search = props => {
               type="text" 
               onChange={(e)=>setSearchTerm(e.currentTarget.value)} 
               required/>
-            {/* <input type="submit" value="Search"/> */}
+            {!showDots ? '' : <div className="dots">
+              <Loader color="#ff2e63" type="ThreeDots" width="30px"/>
+            </div>}
           </div>
         </fieldset>
       </form>
@@ -73,9 +79,9 @@ const Search = props => {
         scrollableTarget="scrollableInSearch"
         dataLength={projects.length}
         hasMore={projects.length<totalProjects}
-        loader={<p className="bot-msg">Loading...</p>}
-        endMessage={totalProjects > 5 ? <p>That's it for now.</p> : ''}>
-        {projects.map((p,i)=> <ProjectCard {...p}key={i} details={p}/>)}
+        loader={<div className="Loader"><Loader color="#ff2e63" type="ThreeDots" width="30px"/></div>}
+        endMessage={totalProjects > 5 ? <p className="bot-msg">That's it for now.</p>: ''}>
+        {projects.map((p,i)=> <ProjectCard key={i} project={p}/>)}
       </InfiniteScroll>
     </div>
   </section>

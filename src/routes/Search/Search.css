@@ -30,6 +30,7 @@
   align-items: center;
   box-sizing: border-box;
   width: 100%;
+  position: relative;
 }
 
 .Search input[type="text"] {
@@ -37,7 +38,7 @@
   height: 2.4rem;
   width: 100%;
   font-size: 1rem;
-  padding: 0 5px;
+  padding: 0 45px 0 5px;
   border-collapse: collapse;
   border: 1px solid rgba(169,169,169,0.3);
   border-top-left-radius: 10px;
@@ -75,4 +76,15 @@
 
 .bot-msg{
   text-align: center;
+}
+
+.Loader {
+  display: flex;
+  justify-content: center;
+}
+
+.dots {
+  padding-right: 10px;
+  position: absolute;
+  right: 0;
 }

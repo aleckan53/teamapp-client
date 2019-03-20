@@ -14,15 +14,15 @@
 .ProjectsList header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
   padding-bottom: 1rem;
 }
 
-.add{
-  text-decoration: none;
+.ProjectsList__addBtn{
+  height: 100%;
+  align-self: center;
 }
 
-.add svg {
+.ProjectsList__addBtn svg {
   height: 2rem;
   width: 2rem;
   fill: var(--main-color);

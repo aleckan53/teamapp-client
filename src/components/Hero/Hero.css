@@ -3,9 +3,13 @@
   position: relative;
   width: 100%;
   height: 30vh;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
 }
 
-.Hero h2 {
+.Hero h1 {
   padding: 0 5%;
   position: absolute;
   z-index: 3;

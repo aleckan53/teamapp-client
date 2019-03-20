@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import './Notifications.css'
-import config from '../config'
+import ApiService from '../services/api-service'
 
 import { IoMdTrash } from 'react-icons/io'
  
 const Notifications = props =>{
-
+  const [error, setError] = useState(null)
   const [data, setData] = useState({
     notifications: [{
       id: '',
@@ -15,10 +15,9 @@ const Notifications = props =>{
   })
 
   useEffect(()=>{
-    fetch(`${config.API_ENDPOINT}/notifications?id=${props.ownerId}`)
-      .then(res=> res.json())
+    ApiService.getNotifications(props.ownerId)
       .then(res=> setData({notifications: res}))
-      .catch(err=> console.log(err))
+      .catch(error=> this.setError({error}))
   }, [])
 
   return <section className="Notifications">
