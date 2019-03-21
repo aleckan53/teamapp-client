@@ -1,37 +1,36 @@
-.ProjectService legend {
+.ProjectForm legend {
   font-size: 1.5rem;
   font-weight: bold;
   margin-bottom: 1.5rem;
 }
 
-.ProjectService fieldset {
+.ProjectForm fieldset {
   border: none;
   margin: 0;
   padding: 0;
 }
 
-.ProjectService label {
+.ProjectForm label {
   font-weight: bold;
 }
 
-.ProjectService fieldset > div {
+.ProjectForm div {
   display: flex;
   flex-direction: column;
 }
 
-.ProjectService fieldset input {
+.ProjectForm input {
   padding: 0 5px;
   box-sizing: border-box;
   width: 100%;
   margin: 0.5rem 0;
-  height: 1.5rem;
+  height: 2.4rem;
   font-size: 0.8rem;
   border: 1px solid rgba(169,169,169,0.3);
   border-radius: 10px;
 }
 
-.ProjectService fieldset > input[type="submit"], 
-input[name="delete"] {
+.ProjectForm button {
   width: 100%;
   padding: 0;
   height: 30px;
@@ -39,14 +38,17 @@ input[name="delete"] {
   border-radius: 10px;
   font-size: 1rem;
   font-weight: bold;
-}
-
-input[name="delete"] {
   background: var(--main-color);
   color: white;
+  margin-bottom: 0.6rem;
 }
 
-.ProjectService fieldset textarea {
+.ProjectForm .delete-btn {
+  background: white;
+  color: gray
+}
+
+.ProjectForm textarea {
   padding: 5px;
   margin: 0.5rem 0;
   resize: vertical;

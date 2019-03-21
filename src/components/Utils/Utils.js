@@ -1,12 +1,18 @@
 import React from 'react'
+import styles from './Utils.module.css'
 
 export const Section = ({ className, ...props}) => {
   const classes = ['Section', className].filter(Boolean).join(' ')
   return <section className={classes} {...props}/>  
 }
 
-export const Input = ({ className, type, value, onChange, ...props}) => {
-  const classes = ['Section', className].filter(Boolean).join(' ')
+export const Input = () => {
 
-  return <input type={type} value={value} onChange={onChange} {...props}/>
+
+  return (
+    <input
+      className={styles.input}
+    />
+  )
 }
+

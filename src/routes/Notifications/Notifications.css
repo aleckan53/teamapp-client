@@ -4,7 +4,7 @@ ul {
 }
 
 .__icon {
-  content: url('../assets/_ionicons_svg_md-notifications-outline.svg');
+  content: url('./assets/_ionicons_svg_md-notifications-outline.svg');
   width: 2rem;
   margin-right: 1rem;
 }

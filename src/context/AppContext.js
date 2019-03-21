@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
+import ApiService from '../services/api-service'
 
 const AppContext = React.createContext({
+  ready: false,
   owner: {},
   ownerProjects: [],
   currentProject: {},
@@ -15,20 +17,34 @@ export default AppContext
 
 export class AppProvider extends Component {
   state = {
+    ready: false,
     owner: {},
     ownerProjects: [],
     currentProject: {},
     error: null,
   }
-  
-  setInitialData = (data) => {
+
+  componentDidMount(){
+    ApiService.getOwnerData()
+      .then(res=> {
+        this.setInitialData(res)
+      })
+      .then(()=> {
+        this.setState({
+          ready: true
+        })
+      })
+      .catch(error=> this.setError({error}))
+  }
+
+  setInitialData = data => {
     this.setState({
       owner: data.owner,
       ownerProjects: data.user_projects,
     })
   }
 
-  setCurrentProject = (currentProject) => {
+  setCurrentProject = currentProject => {
     this.setState({
       currentProject
     })
@@ -65,6 +81,9 @@ export class AppProvider extends Component {
     })
   }
 
+  setError = error => {
+    this.setState({error})
+  }
 
   render() {
     const value = {
@@ -77,6 +96,8 @@ export class AppProvider extends Component {
       updateProject: this.updateProject,
       removeProject: this.removeProject,
       setInitialData: this.setInitialData,
+      setError: this.setError,
+      ready: this.state.ready,
     }
 
     return <AppContext.Provider value={value}>

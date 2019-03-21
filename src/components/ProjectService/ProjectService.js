@@ -1,96 +1,81 @@
 import React, { useState, useContext, useEffect } from 'react'
 import ApiService from '../../services/api-service'
 import AppContext from '../../context/AppContext'
+import ProjectForm from '../ProjectForm/ProjectForm'
 import './ProjectService.css'
 
-const ProjectService = props => {
-  const context = useContext(AppContext)
-  const [title, setTitle] = useState('')
-  const [img, setImg] = useState('')
-  const [description, setDescription] = useState('')
+function FormHOC (Form, props) {
+  return class extends React.Component {
+    static contextType = AppContext
 
-  useEffect(() => {
-    const projectIndex = context.ownerProjects.findIndex(p=>p.id===Number(props.match.params.id))
-    context.setCurrentProject(context.ownerProjects[projectIndex])
-    if(props.edit && projectIndex >= 0) {
-      context.setCurrentProject(context.ownerProjects[projectIndex])
+    state = {
+      title: '',
+      img: '',
+      description: '',
+      project_id: '',
+      owner_id: this.context.owner.id,
+      deleteRequest: false,
     }
-  }, [context.ownerProjects])
+
+    componentDidMount() {
+      if(props.type === 'Edit') {
+        const id = Number(this.props.match.params.id)
+        ApiService.getProjectById(id)
+        .then(res => {
+          this.setState(...res)
+        })
+      }
+    }
   
-  useEffect(()=>{
-    if (context.currentProject && props.edit) {
-      setTitle(context.currentProject.title)
-      setImg(context.currentProject.img)
-      setDescription(context.currentProject.description)  
+    handleSubmit = e => {
+      e.preventDefault()
+      props.handleSubmit(this.context, this.state, this.props)
     }
-  }, [context.currentProject])
-
-  const handleSubmit = (e, proj) => {
-    e.preventDefault()
-    e.target.delete.value
-      ? ApiService.deleteProject(proj.project_id)
-        .then(()=> {
-          context.deleteProject(proj.project_id)
-          props.history.push('/projects')
-        })
-    : !props.edit
-      ? ApiService.uploadProject(proj)
-        .then(res=> {
-          context.addNewProject(res)
-          context.setCurrentProject(res)
-          props.history.push(`/projects/${res.id}`)
-        }) 
-      : ApiService.updateProject(proj.project_id, proj)
-        .then(res=> {
-          context.updateProject(res)
-          props.history.goBack()
-        })
+  
+    render() {
+      return (
+        <Form
+        {...this.props}
+        handleSubmit={this.handleSubmit}
+        requestType={`${props.type}`}
+        value={this.state}
+        setDelete={()=>this.setState({deleteRequest: true})}
+        setTitle={title=>this.setState({title})} 
+        setImg={img=>this.setState({img})} 
+        setDescription={description=>this.setState({description})}>
+        {props.children}
+        </Form>
+      )
+    }
   }
-
-  return <section className="ProjectService">
-    <form 
-      onSubmit={e => handleSubmit(e, {
-          title,
-          img,
-          description,
-          owner_id: context.owner.id,
-          project_id: props.match.params.id,
-        })}
-      id="ProjectServiceForm">
-      <fieldset>
-        <legend>{props.edit ? 'Edit project' : 'Add Project'}</legend>
-        <div>
-          <label htmlFor="title">Title</label>
-          <input
-            onChange={e => setTitle(e.currentTarget.value)}
-            value={title}
-            required
-            id="title" 
-            type="text"/>
-        </div>
-        <div>
-          <label htmlFor="upload-img">Image link</label>
-          <input 
-            onChange={e => setImg(e.currentTarget.value)}
-            value={img}
-            required
-            id="upload-img" 
-            type="text"/>
-        </div>
-        <div>
-          <label htmlFor="title">Description</label>
-          <textarea 
-            required
-            onChange={e => setDescription(e.currentTarget.value)}
-            value={description}
-            form="ProjectServiceForm"
-            id="description"/>
-        </div>
-        <input type="submit" name="submit" value="Submit"/>
-        {!props.edit ? '' :  <input type="submit" name="delete" value="Delete"/>}
-      </fieldset>
-    </form>
-
-  </section>
 }
-export default ProjectService
+
+export default FormHOC
+
+const addProps = {
+  type: 'Add',
+  handleSubmit(context, project, props) {
+    ApiService.uploadProject(project)
+      .then(res=> {
+        context.addNewProject(res)
+        context.setCurrentProject(res)
+        props.history.push(`/projects/${res.id}`)
+      }) 
+  }, 
+}
+
+const editProps = {
+  type: 'Edit',
+  handleSubmit(context, project, props) {
+    ApiService.updateProject(project.id, project)
+      .then(res=> {
+        context.updateProject(res)
+        context.setCurrentProject(res)
+        props.history.push(`/projects/${res.id}`)
+      })
+  },
+}
+
+export const AddProjectForm = FormHOC(ProjectForm, addProps)
+export const EditProjectForm = FormHOC(ProjectForm, editProps)
+
