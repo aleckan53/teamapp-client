@@ -1,15 +1,18 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import './index.css'
 import App from './components/App/App'
 import { BrowserRouter as Router } from 'react-router-dom'
-import { AppProvider } from './context/AppContext'
+import { ProjectsProvider } from './context/ProjectsContext'
+import { UsersProvider } from './context/UsersContext'
+import './index.css'
 
 ReactDOM.render(
   <Router>
-      <AppProvider>
+    <UsersProvider>
+      <ProjectsProvider>
         <App/>
-      </AppProvider>
+      </ProjectsProvider>
+    </UsersProvider>
   </Router>,
   document.getElementById('root')
 );

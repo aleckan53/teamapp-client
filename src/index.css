@@ -19,6 +19,10 @@ a {
 
 :root{
   --main-color: #ff2e63;
+  --gray-30: rgba(169,169,169,0.3);
+  --padding-side: 0 5% 2%;
+  --subText-color: white;
+  --black-30: rgba(0, 0, 0, 0.3);
 }
 
 section {
@@ -26,14 +30,3 @@ section {
   padding: 0 5% 2%;
   box-sizing: border-box;
 }
-
-section h1 {
-  font-size: 1.8rem;
-  margin: 0;
-  padding: 0;
-}
-
-.NotFound {
-  text-align: center;
-}
-

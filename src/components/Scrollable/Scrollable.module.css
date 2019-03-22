@@ -1,0 +1,15 @@
+.scrollable {
+  margin-top: 2rem;
+  height: 77vh;
+  overflow: scroll;
+  position: relative;
+}
+
+.scrollable::-webkit-scrollbar{
+  width: 0px;
+}
+
+.botMsg {
+  text-align: center;
+  padding: 10px 0 0;
+}

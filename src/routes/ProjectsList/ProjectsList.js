@@ -1,31 +1,28 @@
 import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
-import { IoMdAddCircle } from 'react-icons/io'
+import { IoMdAddCircle as icon } from 'react-icons/io'
 import ProjectCard from '../../components/ProjectCard/ProjectCard'
-import AppContext from '../../context/AppContext'
-import './ProjectsList.css'
+import ProjectsContext from '../../context/ProjectsContext'
+import { Header, HeaderBtn } from '../../components/Basic/Basic'
  
 const ProjectsList = props => {
 
-  const context = useContext(AppContext)
+  const context = useContext(ProjectsContext)
 
   return (
-  <section className="ProjectsList">
-    <header>
-      <h1>Projetcs</h1>
-      <div className="ProjectsList__addBtn">
-        <Link to="/add-project">
-          <IoMdAddCircle/>
-        </Link>
-      </div>
-    </header>
-    <div className="ProjectsList__scrollable">
-      {context.ownerProjects.map((project, i)=>
+    <section className="ProjectsList">
+      <Header h1='Projects'>
+        <Link to="/projects/add">
+          <HeaderBtn icon={icon}/>
+        </Link>        
+      </Header>
+      {context.projectsList.map((project, i)=>
         <ProjectCard 
           key={i} 
           project={project}/>)}
-    </div>
-  </section>
-)}
+    </section>
+  )
+}
 
 export default ProjectsList
+

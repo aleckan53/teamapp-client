@@ -1,0 +1,11 @@
+.editBtn {
+  color: var(--gray-30);
+  position: absolute;
+  right: 0;
+  padding: var(--padding-side);
+  padding-top: 4%;
+}
+
+.editBtn:hover {
+  color: var(--main-color);
+}
