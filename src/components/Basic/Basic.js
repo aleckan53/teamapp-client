@@ -29,7 +29,7 @@ export const CustomLoader = props => {
   }
 
   return (
-    <div className={styles.loader}>
+    <div className={`${styles.loader} ${props.className}`}>
       <Loader {...loaderProps}/>
     </div>
   )
@@ -45,13 +45,25 @@ export const Input = props => {
 
   return (
     <div className={styles.inputContainer}>
-      <input
-        style={props.style}
-        value={props.value} 
-        id={props.id}
-        type={props.type}
-        onChange={e=> handleChange(e, props)}/>
-        {!props.loader ? '' : <CustomLoader/>}
+      {
+        !props.uncontrolled 
+          ? <input
+              name={props.id}
+              className={`${styles.input} ${props.className}`}
+              style={props.style}
+              id={props.id}
+              type={props.type}
+              value={props.value || ""} 
+              onChange={e=> handleChange(e, props)}/>
+          : <input
+              autoComplete="on"
+              name={props.id}
+              className={`${styles.input} ${props.className}`}
+              style={props.style}
+              id={props.id}
+              type={props.type}/>
+      }
+      {!props.loader ? '' : <CustomLoader/>}
     </div>
   )
 }
@@ -71,7 +83,7 @@ export const Label = props => {
   return (
     <label
       className={styles.label} 
-      htmlFor={props.htmlFor}>{props.label}</label>
+      htmlFor={props.id}>{props.label}</label>
   )
 }
 
@@ -108,7 +120,7 @@ export const Form = props => {
   return (
     <form
       id={props.id}
-      className={styles.form}
+      className={`${styles.form} ${props.className}`}
       onSubmit={e=>props.handleSubmit(e)}>
       <fieldset>
         <legend>{props.legend}</legend>

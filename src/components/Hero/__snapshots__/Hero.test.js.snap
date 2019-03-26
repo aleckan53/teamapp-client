@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Hero component renders UI as  expected 1`] = `
+<header
+  className="hero"
+  style={
+    Object {
+      "backgroundImage": "url(https://carepharmaceuticals.com.au/wp-content/uploads/sites/19/2018/02/placeholder-600x400.png)",
+    }
+  }
+>
+  <h1
+    className="h1"
+  >
+    test
+  </h1>
+</header>
+`;

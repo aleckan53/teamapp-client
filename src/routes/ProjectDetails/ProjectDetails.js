@@ -16,7 +16,8 @@ const ProjectDetails = props => {
     if (Object.entries(context.currentProject).length === 0) {
       ProjectsService.getProjectById(props.match.params.id)
         .then(res => {
-          context.setCurrentProject(res[0])
+          console.log(res)
+          context.setCurrentProject(res)
         })
     }
   }, [context.currentProject])

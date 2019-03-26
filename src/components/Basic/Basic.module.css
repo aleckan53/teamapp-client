@@ -27,7 +27,7 @@
   position: relative;
 }
 
-.inputContainer input[type="text"] {
+.input {
   box-sizing: border-box;
   height: 2.4rem;
   width: 100%;

@@ -8,17 +8,27 @@ const Search = props => {
   const [totalProjects, setTotalProjects] = useState()
   const [currentPage, setCurrentPage] = useState(1)
   const [searchTerm, setSearchTerm] = useState('')
-  const [showLoader, setShowLoader] = useState(true)
-
-  useEffect(() => {
-    setCurrentPage(1)
-    scrollToTop()
-    loadProjects(searchTerm)
-  }, [searchTerm])
+  const [showLoader, setShowLoader] = useState(false)
 
   useEffect(() => { 
     loadProjects(searchTerm, currentPage)
-  }, [currentPage])
+  }, [currentPage || searchTerm])
+
+  useEffect(() => {
+    if(searchTerm.length < 1) {
+      loadProjects()
+    }
+
+    if(searchTerm) {
+      setCurrentPage(1)
+      scrollToTop()
+      setShowLoader(true)
+      setTimeout(()=> {
+        setShowLoader(false)
+        loadProjects(searchTerm)
+      }, 2000)
+    }
+  }, [searchTerm])
 
   const loadProjects = (term="", page=1) => {
     ProjectsService.getAllProjects(term, page)
@@ -28,6 +38,7 @@ const Search = props => {
             : setProjects(res.projects)
         setTotalProjects(res.count)
       })
+      .catch(err=> console.error(err))
   }
 
   const scrollToTop = () => {
@@ -40,11 +51,14 @@ const Search = props => {
       ? currentPage
       : setCurrentPage(currentPage+1)
   }
+
+  console.log(searchTerm)
   
   return (
     <section className="Search">
       <Header h1="Search"/>
         <Input 
+          value={searchTerm}
           style={{
             paddingRight: '3rem'
           }}

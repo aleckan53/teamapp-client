@@ -2,6 +2,7 @@ import React from 'react'
 import { Form, LabeledTextArea, LabeledInput, Header, Btn } from '../../components/Basic/Basic'
 
 const FormTemplate = props => {
+
   return (
     <section>
       <Header

@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import ProjectsService from '../services/ProjectService'
+import TokenService from '../services/TokenService'
+
+import UsersContext from './UsersContext';
 
 const ProjectsContext = React.createContext({
   error: null,
@@ -10,6 +13,7 @@ const ProjectsContext = React.createContext({
   addProject: ()=>{},
   updateProject: ()=>{},
   deleteProject: ()=>{},
+  getUserProjects: ()=>{},
 })
 
 export default ProjectsContext
@@ -21,10 +25,18 @@ export class ProjectsProvider extends Component {
     projectsList: [],
   }
 
+  static contextType = UsersContext
+
   componentDidMount() {
-    // replace hardcoded value
-    ProjectsService.getUserProjectsList(1)  
-      .then(res=> this.setProjectsList(res)) 
+    if (TokenService.getAuthToken()) {
+      this.getUserProjects()
+    }
+  }
+
+  getUserProjects = () => {
+    ProjectsService.getUserProjectsList()
+      .then(res=> this.setProjectsList(res))
+      .catch(err=> console.log(err))
   }
 
   setCurrentProject = currentProject => {
@@ -70,6 +82,7 @@ export class ProjectsProvider extends Component {
       addProject: this.addProject,
       updateProject: this.updateProject,
       deleteProject: this.deleteProject,
+      getUserProjects: this.getUserProjects,
     }
     return (
       <ProjectsContext.Provider value={value}>

@@ -1,29 +1,46 @@
 import config from '../config'
+import TokenService from './TokenService';
 
 const ProjectsService = {
-  getUserProjectsList(id) {
-    return fetch(`${config.API_ENDPOINT}/projects/user/${id}`)
+  getUserProjectsList() {
+    return fetch(`${config.API_ENDPOINT}/projects/user`, {
+      headers: {
+        'authorization': `bearer ${TokenService.getAuthToken()}`
+      }
+    })
       .then(res=> !res.ok
         ? res.json().then(e=> Promise.reject(e))
         : res.json())
+      .catch(err=> console.error(err))
   },
   getAllProjects(term="", page=1){
-    return fetch(`${config.API_ENDPOINT}/projects?term=${term}&page=${page}`)
+    return fetch(`${config.API_ENDPOINT}/projects?term=${term}&page=${page}`, {
+      headers: {
+        'authorization': `bearer ${TokenService.getAuthToken()}`
+      }
+    })
       .then(res => !res.ok
         ? res.json().then(e => Promise.reject(e))
         : res.json())
+      .catch(err=> console.error(err))
   },
   getProjectById(id){
-    return fetch(`${config.API_ENDPOINT}/projects/${id}`)
+    return fetch(`${config.API_ENDPOINT}/projects/${id}`, {
+      headers: {
+        'authorization': `bearer ${TokenService.getAuthToken()}`
+      }
+    })
       .then(res => !res.ok
         ? res.json().then(e => Promise.reject(e))
         : res.json())
+      .catch(err=> console.error(err))
   },
   uploadProject(context, routerProps, project){
     return fetch(`${config.API_ENDPOINT}/projects/add`, {
       method: 'POST',
       headers: {
-        'content-type': 'application/json'
+        'authorization': `bearer ${TokenService.getAuthToken()}`,
+        'content-type': 'application/json',
       },
       body: JSON.stringify(project)
     })
@@ -35,12 +52,14 @@ const ProjectsService = {
         context.setCurrentProject(res)
         routerProps.history.push(`/projects/${res.id}`)
       })
+      .catch(err=> console.error(err))
   },
   updateProject(context, routerProps, project){
-    return fetch(`${config.API_ENDPOINT}/projects/${project.projectId}`,{
+    return fetch(`${config.API_ENDPOINT}/projects/${project.project_id}`,{
       method: 'PATCH',
       headers: {
-        'content-type': 'application/json'
+        'authorization': `bearer ${TokenService.getAuthToken()}`,
+        'content-type': 'application/json',
       },
       body: JSON.stringify(project)
     })
@@ -52,18 +71,23 @@ const ProjectsService = {
         context.setCurrentProject(res)
         routerProps.history.push(`/projects/${res.id}`)
       })
+      .catch(err=> console.error(err))
   },
-  deleteProject(context, routerProps, projectId){
-    fetch(`${config.API_ENDPOINT}/projects/${projectId}`, {
-      method: 'DELETE'
+  deleteProject(context, routerProps, project_id){
+    fetch(`${config.API_ENDPOINT}/projects/${project_id}`, {
+      method: 'DELETE',
+      headers: {
+        'authorization': `bearer ${TokenService.getAuthToken()}`
+      }
     })
-      .then(res => !res.ok
-        ? res.json().then(e => Promise.reject(e))  
-        : res.json())
-      .then(()=> {
-        context.deleteProject(projectId)
+      .then(res => {
+        if(!res.ok) {
+          return res.json().then(e => Promise.reject(e))
+        }
+        context.deleteProject(project_id)
         routerProps.history.push('/projects')
       })
+      .catch(err=> console.error(err))
   },
 }
 

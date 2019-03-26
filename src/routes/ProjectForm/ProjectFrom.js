@@ -13,8 +13,8 @@ function ProjectForm (WrappedComponent, mainProps) {
     const [title, setTitle] = useState('')
     const [img, setImg] = useState('')
     const [description, setDescription] = useState('')
-    const [userId, setUserId] = useState('')
-    const [projectId, setProjectId] = useState('')
+    const [user_id, setUserId] = useState('')
+    const [project_id, setProjectId] = useState('')
     const [deleteMode, setDeleteMode] = useState(false)
 
     useEffect(()=> {
@@ -24,7 +24,7 @@ function ProjectForm (WrappedComponent, mainProps) {
     useEffect(()=> {
       setProjectId(Number(props.match.params.id))
       projectsContext.setCurrentProject(
-        projectsContext.projectsList.find(p => p.id === projectId)
+        projectsContext.projectsList.find(p => p.id === project_id)
       )
     }, [projectsContext.projectsList])
 
@@ -40,14 +40,14 @@ function ProjectForm (WrappedComponent, mainProps) {
     const handleSubmit = (e) => {
       e.preventDefault()
       if (deleteMode) {
-        mainProps.handleDelete(projectsContext, props, projectId)
+        mainProps.handleDelete(projectsContext, props, project_id)
       } else {
         mainProps.handleSubmit(projectsContext, props, {
-          title, img, description, userId, projectId
+          title, img, description, user_id, project_id
         })
       }
     }
-
+    
     return (
       <WrappedComponent
         value={{

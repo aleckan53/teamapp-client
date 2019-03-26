@@ -16,10 +16,13 @@ const ProjectsList = props => {
           <HeaderBtn icon={icon}/>
         </Link>        
       </Header>
-      {context.projectsList.map((project, i)=>
-        <ProjectCard 
-          key={i} 
-          project={project}/>)}
+      {
+        !context.projectsList ? '' :
+          context.projectsList.map((project, i)=>
+            <ProjectCard 
+              key={i} 
+              project={project}/>)
+      }
     </section>
   )
 }
