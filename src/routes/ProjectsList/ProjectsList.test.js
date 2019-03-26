@@ -15,14 +15,12 @@ describe('ProjectsList component', ()=> {
     ReactDOM.unmountComponentAtNode(div)
   })
 
-  it.skip('renders UI as expected', ()=> {
+  it('renders UI as expected', ()=> {
     const tree = renderer
-    .create(
-      <ProjectsContext.Provider>
-        <ProjectsList/>
-      </ProjectsContext.Provider>
-    )
-    .toJSON()
+      .create(
+        <ProjectsList />
+      )
+      .toJSON()
     expect(tree).toMatchSnapshot()
   })
 })

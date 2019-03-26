@@ -33,7 +33,7 @@ const LoginPage = props => {
 
   const onLoginSuccess = () => {
     const { location, history } = props
-    const destination = (location.state || {}).from || '/'
+    const destination = (location.state || {}).from || '/account'
 
     history.push(destination)
   }

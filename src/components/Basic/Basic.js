@@ -53,7 +53,7 @@ export const Input = props => {
               style={props.style}
               id={props.id}
               type={props.type}
-              value={props.value || ""} 
+              value={props.value || ''} 
               onChange={e=> handleChange(e, props)}/>
           : <input
               autoComplete="on"

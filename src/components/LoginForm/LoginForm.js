@@ -43,7 +43,7 @@ export const SignUpForm = props => {
         value={props.value.password}
         setValue={props.onChange.setPassword}
         id="password"
-        type="text"
+        type="password"
         label="Password"/>
       <LabeledInput
         value={props.value.first_name}
@@ -58,7 +58,7 @@ export const SignUpForm = props => {
         type="text"
         label="Last name"/>
       <LabeledInput
-        value={props.value.avatar}
+        value={props.value.avatar || ''}
         setValue={props.onChange.setAvatar}
         id="avatar"
         type="text"
