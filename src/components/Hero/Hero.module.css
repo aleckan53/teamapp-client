@@ -18,7 +18,7 @@
 }
 
 .editBtn {
-  color: var(--gray-30);
+  color: var(--gray-30) !important;
   position: absolute;
   right: 0;
   padding: var(--padding-side);
@@ -26,6 +26,6 @@
 }
 
 .editBtn:hover {
-  color: var(--main-color);
+  color: var(--main-color)!important;
 }
 

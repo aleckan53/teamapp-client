@@ -27,6 +27,7 @@ const RequestsService = {
       }
     })
     .then(res=> !res.ok ? res.json().then(e=> Promise.reject(e)) : res.json())
+    .catch(err=> console.log(err))
   },
   deleteRequest(req_id) {
     return fetch(`${config.API_ENDPOINT}/requests/${req_id}`, {

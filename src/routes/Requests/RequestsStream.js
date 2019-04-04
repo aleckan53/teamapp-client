@@ -23,7 +23,6 @@ const RequestsStream = props => {
 
     source.onmessage = (e)=> {
       const msg = JSON.parse(e.data)
-      console.log(msg)
       setState({...msg})
     }
 

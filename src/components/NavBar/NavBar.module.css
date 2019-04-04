@@ -1,4 +1,4 @@
-.NavBar {
+.navBar {
   box-sizing: border-box;
   margin: 0;
   box-shadow: 0px 1px 30px -5px rgba(0, 0, 0, 0.3);
@@ -15,11 +15,12 @@
   height: 100%;
 }
 
-.NavBar .active {
+.navBar .active {
   color: var(--main-color);
 }
 
-.NavBar > a {
+.navBar > a {
+  position: relative;
   text-decoration: none;
   color: gray;
   user-select: none;
@@ -27,4 +28,19 @@
 
 h2 {
   margin-top: 0;
+}
+
+.newReqs {
+  position: absolute;
+  z-index: -1;
+  display: block;
+  width: 20px;
+  height: 20px;
+  top: -10px;
+  right: -20px;
+  border-radius: 100%;
+  text-align: center;
+  background-color: var(--main-color);
+  color: white;
+  font-weight: bold;
 }
