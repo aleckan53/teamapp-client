@@ -20,6 +20,7 @@ a {
 :root{
   --main-color: #ff2e63;
   --gray-30: rgba(169,169,169,0.3);
+  --gray-100: rgba(169,169,169,1);
   --padding-side: 0 5% 2%;
   --subText-color: white;
   --black-30: rgba(0, 0, 0, 0.3);

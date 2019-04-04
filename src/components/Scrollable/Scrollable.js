@@ -1,7 +1,7 @@
 import React from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import ProjectCard from '../ProjectCard/ProjectCard'
-import { CustomLoader } from '../Basic/Basic'
+import { CustomLoader, Msg } from '../Basic/Basic'
 import styles from './Scrollable.module.css'
  
 const Scrollable = props => {
@@ -13,8 +13,8 @@ const Scrollable = props => {
         loader={<CustomLoader/>}
         scrollableTarget="Scrollable"
         dataLength={props.dataLength}
-        endMessage={props.totalItems > 5 ? <p className={styles.botMsg}>That's it for now.</p>: ''}>
-        {props.items.map((p,i)=><ProjectCard key={i} project={p}/>)}
+        endMessage={props.totalItems > 5 ? <Msg text="That's it for now"/>: ''}>
+        {props.items.map((p,i)=><ProjectCard to={`/projects/${p.id}`} key={i} project={p}/>)}
       </InfiniteScroll>
     </div>
   )

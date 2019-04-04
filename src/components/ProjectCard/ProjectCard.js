@@ -7,15 +7,15 @@ import { CustomLoader } from '../Basic/Basic'
 const ProjectCard = props => {
   const context = useContext(ProjectsContext)
   const bgImage = {backgroundImage: `url(${props.project.img})`}
-  
   return (
     <Link 
       onClick={()=> context.setCurrentProject(props.project)}
-      to={`/projects/${props.project.id}`}>
+      to={props.to}>
       <div 
         className={styles.projectCard}
         style={bgImage}>
-        <h2>{props.project.title}</h2>
+        <h2>{props.project.title || ''}</h2>
+        {props.children}
         <CustomLoader className={styles.loader}/>
       </div>
     </Link>

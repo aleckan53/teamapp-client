@@ -5,3 +5,11 @@
 .form {
   margin: 0 auto;
 }
+
+.regForm input { 
+  margin-bottom: 1rem;
+}
+
+.regForm textarea {
+  margin-top: 0;
+}

@@ -3,7 +3,9 @@ import UsersService from '../services/UsersService'
 import TokenService from '../services/TokenService'
 
 const UsersContext = React.createContext({
-  userInfo: {},
+  userInfo: {
+    outgoing: []
+  },
   setUserInfo: ()=>{},
   getUserInfo: ()=>{},
 })
@@ -23,8 +25,8 @@ export class UsersProvider extends Component {
 
   getUserInfo = () => {
     UsersService.getUserInfo()
-    .then(res=> this.setUserInfo(res))
-    .catch(err=> console.error(err))
+      .then(res=> this.setUserInfo(res))
+      .catch(err=> console.error(err))
   }
 
   setUserInfo = userInfo => {

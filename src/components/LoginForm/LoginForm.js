@@ -1,5 +1,5 @@
 import React from 'react'
-import { LabeledInput, Form, Btn } from '../Basic/Basic'
+import { LabeledInput, Form, Btn, TextArea, Input} from '../Basic/Basic'
 import styles from './LoginForm.module.css'
 
 export const LoginForm = props => {
@@ -7,15 +7,13 @@ export const LoginForm = props => {
     <Form
       id="loginFrom"
       className={styles.form}
-      handleSubmit={props.handleSubmit}>
+      onSubmit={props.handleSubmit}>
       <LabeledInput
-        uncontrolled
         className={styles.input}
         id="email"
         type="text"
         label="Email"/>
       <LabeledInput
-        uncontrolled
         className={styles.input}
         id="password"
         type="password"
@@ -28,42 +26,45 @@ export const LoginForm = props => {
 }
 
 export const SignUpForm = props => {
-
   return (
     <Form
+      className={styles.regForm}
       id="signUpForm"
       handleSubmit={props.handleSubmit}>
-      <LabeledInput
+      <Input
+        placeholder="Email *"
         value={props.value.email}
-        setValue={props.onChange.setEmail}
         id="email"
         type="text"
-        label="Email"/>
-      <LabeledInput
+        onChange={props.onChange.setEmail}/>
+      <Input
+        placeholder="Password *"
         value={props.value.password}
-        setValue={props.onChange.setPassword}
         id="password"
         type="password"
-        label="Password"/>
-      <LabeledInput
+        onChange={props.onChange.setPassword}/>
+      <Input
+        placeholder="First Name *"
         value={props.value.first_name}
-        setValue={props.onChange.setFirst_name}
         id="first_name"
         type="text"
-        label="First name"/>
-      <LabeledInput
+        onChange={props.onChange.setFirst_name}/>
+      <Input
+        placeholder="Last Name *"
         value={props.value.last_name}
-        setValue={props.onChange.setLast_name}
         id="last_name"
         type="text"
-        label="Last name"/>
-      <LabeledInput
+        onChange={props.onChange.setLast_name}/>
+      <Input
+        placeholder="Profile image"
         value={props.value.avatar || ''}
-        setValue={props.onChange.setAvatar}
         id="avatar"
         type="text"
-        label="Profile image"/>
+        onChange={props.onChange.setAvatar}/>
+      <TextArea
+        />
       <Btn
+        placeholder='Write '
         title="Create profile"
         type="submit"/>
     </Form>

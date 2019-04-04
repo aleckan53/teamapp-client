@@ -13,7 +13,6 @@ const LoginPage = props => {
     e.preventDefault()
 
     const { email, password } = e.target
-
     AuthApiService.postLogin({
       email: email.value,
       password: password.value,
@@ -39,8 +38,10 @@ const LoginPage = props => {
   }
 
   return (
-    <LoginForm
-      handleSubmit={handleSubmitJwtAuth}/>
+    <section>
+      <LoginForm
+        handleSubmit={handleSubmitJwtAuth}/>
+    </section>
   )
 }
 

@@ -1,6 +1,6 @@
 .scrollable {
   margin-top: 2rem;
-  height: 77vh;
+  height: 73vh;
   overflow: scroll;
   position: relative;
 }

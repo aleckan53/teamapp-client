@@ -2,7 +2,6 @@ import React from 'react'
 import styles from './Basic.module.css'
 import Loader from 'react-loader-spinner'
 
-
 export const Header = props => {
   return (
     <header className={styles.header}>
@@ -36,44 +35,22 @@ export const CustomLoader = props => {
 }
 
 export const Input = props => {
-  const handleChange = (e, props) => {
-    if (props.handleLoader) {
-      props.handleLoader(true)
-    }
-    props.setValue(e.currentTarget.value)
-  }
-
   return (
     <div className={styles.inputContainer}>
-      {
-        !props.uncontrolled 
-          ? <input
-              name={props.id}
-              className={`${styles.input} ${props.className}`}
-              style={props.style}
-              id={props.id}
-              type={props.type}
-              value={props.value || ''} 
-              onChange={e=> handleChange(e, props)}/>
-          : <input
-              autoComplete="on"
-              name={props.id}
-              className={`${styles.input} ${props.className}`}
-              style={props.style}
-              id={props.id}
-              type={props.type}/>
-      }
-      {!props.loader ? '' : <CustomLoader/>}
+      <input
+        name={props.id}
+        className={`${styles.input} ${props.className}`}
+        {...props}/>
+      {!props.loading ? '' : <CustomLoader/>}
     </div>
   )
 }
 
-export const Btn = props => {
-  return (
+export const Btn = ({...props}) => {
+  return props.visible ? '' : (
     <button
-      onClick={()=> !props.onClick ? '' : props.onClick()} 
-      type={props.type}
-      className={styles.btn}>
+      {...props}
+      className={`${styles.btn} ${props.className}`}>
       {props.title}
     </button>
   )
@@ -90,11 +67,8 @@ export const Label = props => {
 export const TextArea = props => {
   return (
     <textarea
-      id={props.id}
-      form={props.form}
-      value={props.value}
-      className={styles.textArea}
-      onChange={e=>props.setValue(e.currentTarget.value)}/>
+      {...props}
+      className={styles.textArea}/>
   )
 }
 
@@ -119,13 +93,27 @@ export const LabeledTextArea = props => {
 export const Form = props => {
   return (
     <form
-      id={props.id}
-      className={`${styles.form} ${props.className}`}
-      onSubmit={e=>props.handleSubmit(e)}>
+      {...props}
+      className={`${styles.form} ${props.className}`}>
       <fieldset>
         <legend>{props.legend}</legend>
         {props.children}
       </fieldset>
     </form>
+  )
+}
+
+export const Msg = props => {
+  return (
+    <p className={styles.msg}>{props.text}</p>
+  )
+}
+
+export const TitledText = props => {
+  return (
+    <>
+      <h3>{props.title}</h3>
+      <p>{props.content}</p>
+    </>
   )
 }

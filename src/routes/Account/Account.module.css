@@ -1,0 +1,11 @@
+.editBtn {
+  color: rgba(255,255,255,0.5);
+  position: absolute;
+  right: 0;
+  padding: var(--padding-side);
+  padding-top: 5%;
+}
+
+.editBtn:hover {
+  color: var(--main-color);
+}

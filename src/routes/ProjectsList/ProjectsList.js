@@ -3,12 +3,13 @@ import { Link } from 'react-router-dom'
 import { IoMdAddCircle as icon } from 'react-icons/io'
 import ProjectCard from '../../components/ProjectCard/ProjectCard'
 import ProjectsContext from '../../context/ProjectsContext'
-import { Header, HeaderBtn } from '../../components/Basic/Basic'
+import { Header, HeaderBtn, Msg } from '../../components/Basic/Basic'
  
 const ProjectsList = props => {
 
   const context = useContext(ProjectsContext)
-
+  const projectsCount = context.projectsList.length || 0
+  
   return (
     <section className="ProjectsList">
       <Header h1='Projects'>
@@ -16,13 +17,13 @@ const ProjectsList = props => {
           <HeaderBtn icon={icon}/>
         </Link>        
       </Header>
-      {
-        !context.projectsList ? '' :
-          context.projectsList.map((project, i)=>
+      {!projectsCount
+        ? <Msg text="Your projects appear here"/>
+        : context.projectsList.map((project, i)=>
             <ProjectCard 
+              to={`/projects/${project.id}`}
               key={i} 
-              project={project}/>)
-      }
+              project={project}/>)}
     </section>
   )
 }

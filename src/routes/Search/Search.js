@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react'
 import ProjectsService from '../../services/ProjectService'
 import { Header, Input } from '../../components/Basic/Basic'
 import Scrollable from '../../components/Scrollable/Scrollable'
- 
+import SearchService from './SearchService'
+
 const Search = props => {
   const [projects, setProjects] = useState([])
   const [totalProjects, setTotalProjects] = useState()
@@ -15,18 +16,15 @@ const Search = props => {
   }, [currentPage || searchTerm])
 
   useEffect(() => {
-    if(searchTerm.length < 1) {
-      loadProjects()
-    }
-
+    if(searchTerm.length < 1) loadProjects()
     if(searchTerm) {
       setCurrentPage(1)
-      scrollToTop()
+      SearchService.scrollTop('Scrollable')
       setShowLoader(true)
       setTimeout(()=> {
         setShowLoader(false)
         loadProjects(searchTerm)
-      }, 2000)
+      }, 600)
     }
   }, [searchTerm])
 
@@ -41,32 +39,20 @@ const Search = props => {
       .catch(err=> console.error(err))
   }
 
-  const scrollToTop = () => {
-    const element = document.getElementById('Scrollable')
-    if (element) element.scrollTop = 0
-  }
-
-  const nextPage = () => {
-    return currentPage === Math.ceil(totalProjects/5)
-      ? currentPage
-      : setCurrentPage(currentPage+1)
-  }
-
-  console.log(searchTerm)
-  
   return (
     <section className="Search">
       <Header h1="Search"/>
         <Input 
           value={searchTerm}
           style={{
-            paddingRight: '3rem'
+            paddingRight: '3rem',
+            
           }}
-          loader={showLoader}
-          setValue={setSearchTerm}
+          loading={showLoader || false}
+          onChange={(e)=>setSearchTerm(e.target.value)}
           type="text"/>
       <Scrollable
-          next={nextPage}
+          next={()=>SearchService.nextPage(currentPage, totalProjects, setCurrentPage)}
           dataLength={projects.length}
           hasMore={projects.length < totalProjects}
           totalItems={totalProjects}
