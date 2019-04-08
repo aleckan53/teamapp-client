@@ -32,12 +32,16 @@ const ProjectDetails = props => {
       userCanEdit:
         proj.leader_id === usersContext.userInfo.id,
       userHasProject:
-        projectsContext.projectsList.some(project=> proj.id === project.id),
+        projectsContext.projectsList.some(project=> props.match.params.id == project.id),
       // userAwaitsAnswer: 
       //   usersContext.userInfo.outgoing.some(req => req.project_id === props.match.params.id)
     })  
-  }, [usersContext.userInfo.outgoing])
 
+    return () => {
+      projectsContext.setCurrentProject({})
+    }
+  }, [usersContext.userInfo.outgoing])
+  
   return (
     <div className="ProjectDetails">
       <Hero 

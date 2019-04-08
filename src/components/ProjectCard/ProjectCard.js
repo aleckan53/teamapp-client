@@ -10,7 +10,7 @@ const ProjectCard = props => {
   return (
     <Link 
       onClick={()=> context.setCurrentProject(props.project)}
-      to={props.to}>
+      to={`/projects/${props.project.id}`}>
       <div 
         className={styles.projectCard}
         style={bgImage}>

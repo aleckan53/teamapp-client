@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react'
 import config from '../../config'
 import TokenService from '../../services/TokenService'
 import RequestCard from '../../components/RequestCard/RequestCard'
-import { Header, HeaderBtn, Msg } from '../../components/Basic/Basic'
-import { IoMdTrash as icon } from 'react-icons/io'
+import { Header, Msg } from '../../components/Basic/Basic'
 import EventSource from 'eventsource'
 
 const RequestsStream = props => {
@@ -23,8 +22,11 @@ const RequestsStream = props => {
 
     src.onmessage = ev => {
       const data = JSON.parse(ev.data)
+      // filters out 'accepted' and 'declined' requests
+      const pendingOnly = data.incoming.filter(r => r.status === 'Pending')
+      
       setState({
-        incoming: [...state.incoming, ...data.incoming],
+        incoming: [...state.incoming, ...pendingOnly],
         outgoing: [...state.outgoing, ...data.outgoing],
       })
     }
@@ -41,9 +43,7 @@ const RequestsStream = props => {
 
   return (
     <section className='Requests'>
-      <Header h1='Requests'>
-        <HeaderBtn icon={icon}/>
-      </Header>
+      <Header h1='Requests'/>
       { state.incoming.length === 0 ? '' : (
         <div>
           <h3>Incoming</h3>

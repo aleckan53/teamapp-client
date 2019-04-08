@@ -1,14 +1,20 @@
-import React, { useContext } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { IoMdAddCircle as icon } from 'react-icons/io'
 import ProjectCard from '../../components/ProjectCard/ProjectCard'
-import ProjectsContext from '../../context/ProjectsContext'
 import { Header, HeaderBtn, Msg } from '../../components/Basic/Basic'
+import ProjectsService from '../../services/ProjectService';
  
 const ProjectsList = props => {
+  const [state, setState] = useState([])
 
-  const context = useContext(ProjectsContext)
-  const projectsCount = context.projectsList.length || 0
+  useEffect(() => {
+    ProjectsService.getUserProjectsList()
+      .then(res => setState(res))
+    return () => {
+      setState([])
+    }
+  }, [])
   
   return (
     <section className="ProjectsList">
@@ -17,11 +23,10 @@ const ProjectsList = props => {
           <HeaderBtn icon={icon}/>
         </Link>        
       </Header>
-      {!projectsCount
+      {!state.length
         ? <Msg text="Your projects appear here"/>
-        : context.projectsList.map((project, i)=>
+        : state.map((project, i)=>
             <ProjectCard 
-              to={`/projects/${project.id}`}
               key={i} 
               project={project}/>)}
     </section>

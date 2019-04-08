@@ -18,9 +18,10 @@ const RequestsService = {
           outgoing: [...usersContext.userInfo.outgoing, res]
         })
       })
+      .catch(err => console.error(err))
   },
-  updateRequest(req_id, data) {
-    return fetch(`${config.API_ENDPOINT}/requests/${req_id}`, {
+  updateRequest(data) {
+    return fetch(`${config.API_ENDPOINT}/sse/requests`, {
       method: 'PATCH',
       body: JSON.stringify(data),
       headers: {
