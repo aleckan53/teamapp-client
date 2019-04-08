@@ -3,19 +3,21 @@ import TokenService from '../services/TokenService'
 
 const RequestsService = {
   sendJoinRequest(recipient_id, project_id, usersContext) {
-    return fetch(`${config.API_ENDPOINT}/requests/projects/${project_id}`, {
+    return fetch(`${config.API_ENDPOINT}/sse/requests`, {
       method: 'POST',
-      body: JSON.stringify({recipient_id}), 
+      body: JSON.stringify({recipient_id, project_id}), 
       headers: {
         'authorization': `bearer ${TokenService.getAuthToken()}`,
         'content-type': 'application/json'
       }
     })
       .then(res=> !res.ok ? res.json().then(e=> Promise.reject(e)) : res.json())
-      .then(res=> usersContext.setUserInfo({
-        ...usersContext.userInfo,
-        outgoing: [...usersContext.userInfo.outgoing, res]
-      }))
+      .then(res=> {
+        usersContext.setUserInfo({
+          ...usersContext.userInfo,
+          outgoing: [...usersContext.userInfo.outgoing, res]
+        })
+      })
   },
   updateRequest(req_id, data) {
     return fetch(`${config.API_ENDPOINT}/requests/${req_id}`, {

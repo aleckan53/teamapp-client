@@ -15,7 +15,7 @@ const handleLogOut = () => {
   TokenService.clearAuthToken()
   props.history.push('/account')
 }
-
+console.log(context)
 return <div className="Account">
     <Hero
       img={context.userInfo.avatar}

@@ -33,6 +33,8 @@ const ProjectDetails = props => {
         proj.leader_id === usersContext.userInfo.id,
       userHasProject:
         projectsContext.projectsList.some(project=> proj.id === project.id),
+      // userAwaitsAnswer: 
+      //   usersContext.userInfo.outgoing.some(req => req.project_id === props.match.params.id)
     })  
   }, [usersContext.userInfo.outgoing])
 

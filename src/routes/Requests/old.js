@@ -14,30 +14,27 @@ const RequestsStream = props => {
   })
 
   useEffect(()=> {
-    // sse connection
-    const src = new EventSource(`${config.API_ENDPOINT}/sse`, {
+    // establishes open connection
+    const source = new EventSource(`${config.API_ENDPOINT}/requests/users`, {
       headers: {
         'authorization': `bearer ${TokenService.getAuthToken()}`,
       }
     })
 
-    src.onmessage = ev => {
-      const data = JSON.parse(ev.data)
-      setState({
-        incoming: [...state.incoming, ...data.incoming],
-        outgoing: [...state.outgoing, ...data.outgoing],
-      })
+    source.onmessage = (e)=> {
+      const msg = JSON.parse(e.data)
+      setState({...msg})
     }
 
-    src.onerror = () => {
-      src.close()
+    source.onerror = () => {
+      source.close()
     }
 
-    return () => {
-      src.close()
+    return ()=> {
+      // close connection on unmount
+      source.close()
     }
   }, [])
-
 
   return (
     <section className='Requests'>
