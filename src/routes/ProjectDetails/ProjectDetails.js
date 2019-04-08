@@ -41,7 +41,7 @@ const ProjectDetails = props => {
       projectsContext.setCurrentProject({})
     }
   }, [usersContext.userInfo.outgoing])
-  
+  console.log(proj)
   return (
     <div className="ProjectDetails">
       <Hero 
@@ -53,7 +53,9 @@ const ProjectDetails = props => {
         {
           state.userHasProject
             ? ''
-            : <JoinBtn/>
+            : <JoinBtn
+              project_id={proj.id}
+              leader_id={proj.leader_id}/>
         }
         <TitledText
           title="Description"

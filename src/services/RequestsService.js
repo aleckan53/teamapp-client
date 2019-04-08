@@ -2,7 +2,7 @@ import config from '../config'
 import TokenService from '../services/TokenService'
 
 const RequestsService = {
-  sendJoinRequest(recipient_id, project_id, usersContext) {
+  sendJoinRequest(recipient_id, project_id) {
     return fetch(`${config.API_ENDPOINT}/sse/requests`, {
       method: 'POST',
       body: JSON.stringify({recipient_id, project_id}), 
@@ -12,12 +12,7 @@ const RequestsService = {
       }
     })
       .then(res=> !res.ok ? res.json().then(e=> Promise.reject(e)) : res.json())
-      .then(res=> {
-        usersContext.setUserInfo({
-          ...usersContext.userInfo,
-          outgoing: [...usersContext.userInfo.outgoing, res]
-        })
-      })
+      .then(res=> console.log(res))
       .catch(err => console.error(err))
   },
   updateRequest(data) {

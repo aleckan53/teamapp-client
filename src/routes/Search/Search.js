@@ -2,61 +2,75 @@ import React, { useState, useEffect } from 'react'
 import ProjectsService from '../../services/ProjectService'
 import { Header, Input } from '../../components/Basic/Basic'
 import Scrollable from '../../components/Scrollable/Scrollable'
-import SearchService from './SearchService'
 
 const Search = props => {
-  const [projects, setProjects] = useState([])
-  const [totalProjects, setTotalProjects] = useState()
-  const [currentPage, setCurrentPage] = useState(1)
-  const [searchTerm, setSearchTerm] = useState('')
-  const [showLoader, setShowLoader] = useState(false)
+  const [state, setState] = useState({
+    projects: [],
+    totalProjects: null,
+    currentPage: 1,
+    searchTerm: '',
+    showLoader: false,
+    term: ''
+  })
 
+  // TODO: make api request when user done typing
   useEffect(() => { 
-    loadProjects(searchTerm, currentPage)
-  }, [currentPage || searchTerm])
-
-  useEffect(() => {
-    if(searchTerm.length < 1) loadProjects()
-    if(searchTerm) {
-      setCurrentPage(1)
-      SearchService.scrollTop('Scrollable')
-      setShowLoader(true)
-      setTimeout(()=> {
-        setShowLoader(false)
-        loadProjects(searchTerm)
-      }, 600)
-    }
-  }, [searchTerm])
+    loadProjects(state.searchTerm, state.currentPage)
+  }, [state.currentPage, state.searchTerm])
 
   const loadProjects = (term="", page=1) => {
     ProjectsService.getAllProjects(term, page)
       .then(res => {
-          page > 1
-            ? setProjects([...projects, ...res.projects])
-            : setProjects(res.projects)
-        setTotalProjects(res.count)
+        if(page > 1) {
+          setState({
+            ...state,
+            projects: [...state.projects, ...res.projects],
+            totalProjects: res.count
+          })
+        } else {
+          setState({
+            ...state,
+            projects: res.projects,
+            totalProjects: res.count,
+          })
+        }
       })
-      .catch(err=> console.error(err))
+  }
+
+  const nextPage = () => {
+    return state.currentPage === Math.ceil(state.totalProjects/5)
+      ? state.currentPage
+      : setState({
+        ...state,
+        currentPage: ++state.currentPage
+      })
+  }
+
+  const scrollTop = () => {
+    return document.getElementById('Scrollable').scrollTop = 0
   }
 
   return (
     <section className="Search">
       <Header h1="Search"/>
         <Input 
-          value={searchTerm}
-          style={{
-            paddingRight: '3rem',
-            
+          value={state.searchTerm}
+          style={{ paddingRight: '3rem' }}
+          onChange={e => {
+            setState({
+              ...state,
+              searchTerm: e.target.value,
+              currentPage: 1
+            })
+            scrollTop()
           }}
-          loading={showLoader || false}
-          onChange={(e)=>setSearchTerm(e.target.value)}
           type="text"/>
       <Scrollable
-          next={()=>SearchService.nextPage(currentPage, totalProjects, setCurrentPage)}
-          dataLength={projects.length}
-          hasMore={projects.length < totalProjects}
-          totalItems={totalProjects}
-          items={projects}/>  
+        next={() => nextPage()}
+        dataLength={state.projects.length}
+        hasMore={state.projects.length < state.totalProjects}
+        totalItems={state.totalProjects}
+        items={state.projects}/>  
     </section>
   )
 }

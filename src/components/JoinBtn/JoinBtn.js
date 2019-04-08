@@ -1,24 +1,16 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { Btn } from '../Basic/Basic'
 import RequestsService from '../../services/RequestsService'
-import ProjectsContext from '../../context/ProjectsContext'
-import UsersContext from '../../context/UsersContext'
-
 
 const JoinBtn = props => {
-  const projectsContext = useContext(ProjectsContext)
-  const usersContext = useContext(UsersContext)
-
-  const handleJoin = () => {
-    const leaderId = projectsContext.currentProject.leader_id
-    const projectId = projectsContext.currentProject.id
-    RequestsService.sendJoinRequest(leaderId, projectId, usersContext)
+  const handleJoin = (leader_id, project_id) => {
+    RequestsService.sendJoinRequest(leader_id, project_id)
   }
 
   return (
     <Btn
       title='Join project'
-      onClick={()=> handleJoin()} 
+      onClick={()=> handleJoin(props.leader_id, props.project_id)} 
       {...props}/>
   )
 }

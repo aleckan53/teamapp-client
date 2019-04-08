@@ -1,10 +1,8 @@
-import React, { useState, useContext } from 'react'
-import { Header, Form, LabeledInput, LabeledTextArea, Btn } from '../../components/Basic/Basic';
-import ProjectsContext from '../../context/ProjectsContext'
-import ProjectsService from '../../services/ProjectService';
+import React, { useState } from 'react'
+import { Header, Form, LabeledInput, LabeledTextArea, Btn } from '../../components/Basic/Basic'
+import ProjectsService from '../../services/ProjectService'
 
 const AddProject = props => {
-  const projectsContext = useContext(ProjectsContext)
 
   const [state, setState] = useState({
     title: '',
@@ -14,7 +12,7 @@ const AddProject = props => {
 
   const handleCreateProject = e => {
     e.preventDefault()
-    ProjectsService.uploadProject(projectsContext, props, state)
+    ProjectsService.uploadProject(props, state)
   }
 
   return (
