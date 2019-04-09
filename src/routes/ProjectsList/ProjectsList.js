@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { IoMdAddCircle as icon } from 'react-icons/io'
 import ProjectCard from '../../components/ProjectCard/ProjectCard'
 import { Header, HeaderBtn, Msg } from '../../components/Basic/Basic'
-import ProjectsService from '../../services/ProjectService';
+import ProjectsService from '../../services/ProjectService'
  
 const ProjectsList = props => {
   const [state, setState] = useState([])

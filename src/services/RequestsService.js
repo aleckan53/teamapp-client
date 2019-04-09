@@ -15,10 +15,10 @@ const RequestsService = {
       .then(res=> console.log(res))
       .catch(err => console.error(err))
   },
-  updateRequest(data) {
+  updateRequest(id, status) {
     return fetch(`${config.API_ENDPOINT}/sse/requests`, {
       method: 'PATCH',
-      body: JSON.stringify(data),
+      body: JSON.stringify({id, status}),
       headers: {
         'authorization': `bearer ${TokenService.getAuthToken()}`,
         'content-type': 'application/json'
@@ -27,9 +27,10 @@ const RequestsService = {
     .then(res=> !res.ok ? res.json().then(e=> Promise.reject(e)) : res.json())
     .catch(err=> console.log(err))
   },
-  deleteRequest(req_id) {
-    return fetch(`${config.API_ENDPOINT}/requests/${req_id}`, {
+  deleteRequest(id) {
+    return fetch(`${config.API_ENDPOINT}/sse/requests`, {
       method: 'DELETE',
+      body: JSON.stringify({id}),
       headers: {
         'authorization': `bearer ${TokenService.getAuthToken()}`,
       }

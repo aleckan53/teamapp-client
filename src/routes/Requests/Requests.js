@@ -5,7 +5,7 @@ import RequestCard from '../../components/RequestCard/RequestCard'
 import { Header, Msg } from '../../components/Basic/Basic'
 import EventSource from 'eventsource'
 
-const RequestsStream = props => {
+const Requests = props => {
 
   const [state, setState] = useState({
     incoming: [],
@@ -40,11 +40,10 @@ const RequestsStream = props => {
     }
   }, [])
 
-
   return (
     <section className='Requests'>
       <Header h1='Requests'/>
-      { state.incoming.length === 0 ? '' : (
+      { !state.incoming.length ? '' : (
         <div>
           <h3>Incoming</h3>
           {state.incoming.map((r,i)=> 
@@ -52,7 +51,7 @@ const RequestsStream = props => {
           )}
         </div>
       )}  
-      { state.outgoing.length === 0 ? '' : (
+      { !state.outgoing.length ? '' : (
         <div>
           <h3>Outgoing</h3>
           {state.outgoing.map((r,i)=> 
@@ -66,4 +65,4 @@ const RequestsStream = props => {
   )
 }
 
-export default RequestsStream
+export default Requests

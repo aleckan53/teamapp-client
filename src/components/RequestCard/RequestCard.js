@@ -7,8 +7,6 @@ import { Link } from 'react-router-dom'
 
 const RequestCard = {
   Incoming(props) {
-    const updateRequest = RequestCard.updateRequest
-    const generateDate = RequestCard.generateDate
     return (
       <div className={styles.reqCard}>
         <div className={styles.btnContainer}>
@@ -21,11 +19,11 @@ const RequestCard = {
         </div>
         <div className={styles.btnContainer}>
           <Btn
-            onClick={()=> updateRequest(props.id, 'Accepted')}
+            onClick={()=> RequestsService.updateRequest(props.id, 'Accepted')}
             title='Accept'
             className={styles.btn}/>
           <Btn
-            onClick={()=> updateRequest(props.id, 'Declined')}
+            onClick={()=> RequestsService.updateRequest(props.id, 'Declined')}
             title='Decline'
             className={styles.btn}/>
         </div>
@@ -34,8 +32,6 @@ const RequestCard = {
 
   },
   Outgoing(props) {
-    const updateRequest = RequestCard.updateRequest
-    const generateDate = RequestCard.generateDate
     return (
       <div className={styles.reqCard}>
         <div className={styles.btnContainer}>
@@ -50,30 +46,26 @@ const RequestCard = {
         </div>
         <div className={styles.btnContainer}>
           <Btn
-            onClick={()=> updateRequest(props.id, 'Canceled')}
+            onClick={()=> RequestsService.deleteRequest(props.id)}
             title={props.status}
             className={styles.btn}/>
         </div>
       </div>
     )
   },
-  updateRequest(id, status) {
-    RequestsService.updateRequest({
-      status,
-      id,
-    })
-  },
-  generateDate(date) {
-    return new Date(date)
-      .toLocaleDateString('en-US', {
-        hour12: true,
-        hour: 'numeric',
-        minute: 'numeric',
-        year: 'numeric', 
-        month: 'short', 
-        day: 'numeric'}
-      )
-  }
 }
+
+function generateDate(date) {
+  return new Date(date)
+    .toLocaleDateString('en-US', {
+      hour12: true,
+      hour: 'numeric',
+      minute: 'numeric',
+      year: 'numeric', 
+      month: 'short', 
+      day: 'numeric'}
+    )
+}
+
 
 export default RequestCard

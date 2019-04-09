@@ -1,21 +1,27 @@
 import React, { useState, useContext, useEffect } from 'react'
-import { Header, Form, LabeledInput, LabeledTextArea, Btn } from '../../components/Basic/Basic';
+import { Header, Form, LabeledInput, LabeledTextArea, Btn, Msg } from '../../components/Basic/Basic';
 import ProjectsContext from '../../context/ProjectsContext'
 import ProjectsService from '../../services/ProjectService';
 
 const EditProject = props => {
   const context = useContext(ProjectsContext)
+  const currentProject = useContext(ProjectsContext).currentProject
 
-  const [state, setState] = useState({
-    title: '',
-    img: '',
-    description: '',
-  })
+  const [state, setState] = useState({})
 
   useEffect(()=> {
-    const project = context.projectsList
-      .find(p=> p.id === Number(props.match.params.id))
-    setState(project)
+    if(!Object.entries(currentProject).length) {
+      ProjectsService.getProjectById(props.match.params.id)
+        .then(res => {
+          setState(res)
+        })
+    } else {
+      setState(currentProject)
+    }
+
+    return () => {
+      context.setCurrentProject({})
+    }
   }, [])
 
   const [type, setType] = useState()
@@ -29,7 +35,7 @@ const EditProject = props => {
     }
   }
 
-  return (
+  return !state.userCanEdit ? <Msg text="You can't edit this project"/> : (
     <section className='EditProject'>
       <Header h1='Edit Project'/>
       <Form
@@ -60,7 +66,6 @@ const EditProject = props => {
           name='delete'
           title='Delete project'
           type='submit'/>
-
       </Form>
     </section>
   )

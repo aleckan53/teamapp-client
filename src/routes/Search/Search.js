@@ -36,7 +36,7 @@ const Search = props => {
         }
       })
   }
-
+  
   const nextPage = () => {
     return state.currentPage === Math.ceil(state.totalProjects/5)
       ? state.currentPage

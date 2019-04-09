@@ -1,66 +1,42 @@
 import React, { useEffect, useContext, useState } from 'react'
 import ProjectsService from '../../services/ProjectService'
 import ProjectsContext from '../../context/ProjectsContext'
-import UsersContext from '../../context/UsersContext'
 import Hero from '../../components/Hero/Hero'
 import Contributors from '../../components/Contributors/Contributors'
 import { TitledText } from '../../components/Basic/Basic'
-import JoinBtn from '../../components/JoinBtn/JoinBtn'
 
 const ProjectDetails = props => {
-  const projectsContext = useContext(ProjectsContext)
-  const usersContext = useContext(UsersContext)
+  const { setCurrentProject, currentProject } = useContext(ProjectsContext)
 
-  const [state, setState] = useState({
-    userCanEdit: false,
-    userHasProject: false,
-    userAwaitsAnswer: false,
-  })
-
-  const proj = projectsContext.currentProject || {
-    img: '',
-    title: '',
-    text: '',
-  }
+  const [state, setState] = useState({})
 
   useEffect(()=> { 
-    if (Object.entries(proj).length === 0) {
+    if(!Object.entries(currentProject).length) {
       ProjectsService.getProjectById(props.match.params.id)
-        .then(res => projectsContext.setCurrentProject(res))
+        .then(res => {
+          setState(res)
+        })
+    } else {
+      setState(currentProject)
     }
-    setState({
-      userCanEdit:
-        proj.leader_id === usersContext.userInfo.id,
-      userHasProject:
-        projectsContext.projectsList.some(project=> props.match.params.id == project.id),
-      // userAwaitsAnswer: 
-      //   usersContext.userInfo.outgoing.some(req => req.project_id === props.match.params.id)
-    })  
-
     return () => {
-      projectsContext.setCurrentProject({})
+      setCurrentProject({})
     }
-  }, [usersContext.userInfo.outgoing])
-  console.log(proj)
+  }, [])
+
   return (
     <div className="ProjectDetails">
       <Hero 
         id={props.match.params.id}
         show={state.userCanEdit}
-        img={proj.img}
-        heading={proj.title}/>
+        img={state.img}
+        heading={state.title}/>
       <section>    
-        {
-          state.userHasProject
-            ? ''
-            : <JoinBtn
-              project_id={proj.id}
-              leader_id={proj.leader_id}/>
-        }
         <TitledText
           title="Description"
-          content={proj.description}/>
+          content={state.description}/>
         <Contributors
+          leader_id={state.leader_id}
           project_id={props.match.params.id}/>
       </section>
     </div>

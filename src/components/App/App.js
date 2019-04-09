@@ -11,8 +11,7 @@ import SignUpPage from '../../routes/SignUpPage/SignUpPage'
 import PrivateRoute from '../Routes/PrivateRoute'
 import AddProject from '../../routes/AddProject/AddProject'
 import EditProject from '../../routes/EditProject/EditProject'
-import RequestsStream from '../../routes/Requests/RequestsStream'
-import { AnimatedSwitch } from 'react-router-transition'
+import Requests from '../../routes/Requests/Requests'
 
 const App = () => {
   return (
@@ -24,7 +23,7 @@ const App = () => {
           <PrivateRoute path='/projects/:id/edit' component={EditProject}/>
           <PrivateRoute path='/projects/:id' component={ProjectDetails}/>
           <PrivateRoute path='/projects' component={ProjectsList}/>
-          <PrivateRoute path='/requests' component={RequestsStream}/>
+          <PrivateRoute path='/requests' component={Requests}/>
           <PrivateRoute path='/account' component={Account}/>
           <PrivateRoute path='/search' component={Search}/>
           <Route path="/signup" component={SignUpPage}/>
