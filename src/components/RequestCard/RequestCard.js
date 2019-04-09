@@ -13,7 +13,9 @@ const RequestCard = {
           <Down className={styles.iconDown}/>
         </div>
         <div className={styles.body}>
-          <p>{props.title}</p>
+          <Link to={`/projects/${props.project_id}`}>
+            <p>{props.title}</p>
+          </Link>
           <p>{`From: ${props.first_name} ${props.last_name}`}</p>
           <p>{generateDate(props.created_at)}</p>
         </div>

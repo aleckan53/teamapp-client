@@ -28,9 +28,8 @@ const RequestsService = {
     .catch(err=> console.log(err))
   },
   deleteRequest(id) {
-    return fetch(`${config.API_ENDPOINT}/sse/requests`, {
+    return fetch(`${config.API_ENDPOINT}/sse/requests/${id}`, {
       method: 'DELETE',
-      body: JSON.stringify({id}),
       headers: {
         'authorization': `bearer ${TokenService.getAuthToken()}`,
       }
