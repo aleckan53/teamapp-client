@@ -1,5 +1,6 @@
 import config from '../config'
 import TokenService from '../services/TokenService'
+import EventSource from 'eventsource'
 
 const RequestsService = {
   sendJoinRequest(recipient_id, project_id) {
@@ -35,6 +36,14 @@ const RequestsService = {
       }
     })
       .then(res=> !res.ok ? res.json().then(e=> Promise.reject(e)) : res.json())
+  },
+  getRequestsSse() {
+    const src = new EventSource(`${config.API_ENDPOINT}/sse`, {
+      headers: {
+        'authorization': `bearer ${TokenService.getAuthToken()}`,
+      }
+    })
+    return src
   }
 }
 

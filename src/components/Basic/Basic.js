@@ -136,3 +136,8 @@ export const CheckBox = props => {
     </div>
   )
 }
+
+// TODO (upgrade) #2: Dot
+export const Dot = props => {
+  return <span className={`${styles.dot}`}></span>
+}

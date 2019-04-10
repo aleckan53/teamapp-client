@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import config from '../../config'
-import TokenService from '../../services/TokenService'
 import RequestCard from '../../components/RequestCard/RequestCard'
 import { Header, Msg } from '../../components/Basic/Basic'
-import EventSource from 'eventsource'
+import RequestsService from '../../services/RequestsService'
 
 const Requests = props => {
 
@@ -14,15 +12,10 @@ const Requests = props => {
 
   useEffect(()=> {
     // sse connection
-    const src = new EventSource(`${config.API_ENDPOINT}/sse`, {
-      headers: {
-        'authorization': `bearer ${TokenService.getAuthToken()}`,
-      }
-    })
+    const src = RequestsService.getRequestsSse()
 
     src.onmessage = ev => {
       const data = JSON.parse(ev.data)
-      console.log(data)
       // filters out 'accepted' and 'declined' requests
       const pendingOnly = data.incoming.filter(r => r.status === 'Pending')
       
