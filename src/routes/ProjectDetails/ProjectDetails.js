@@ -4,6 +4,7 @@ import ProjectsContext from '../../context/ProjectsContext'
 import Hero from '../../components/Hero/Hero'
 import Contributors from '../../components/Contributors/Contributors'
 import { TitledText } from '../../components/Basic/Basic'
+import Social from '../../components/Social/Social'
 
 const ProjectDetails = props => {
   const { setCurrentProject, currentProject } = useContext(ProjectsContext)
@@ -23,6 +24,7 @@ const ProjectDetails = props => {
       setCurrentProject({})
     }
   }, [])
+
   return (
     <div className="ProjectDetails">
       <Hero 
@@ -34,7 +36,9 @@ const ProjectDetails = props => {
         <TitledText
           title="Description"
           content={state.description}/>
+        <Social/>
         <Contributors
+          {...props}
           leader_id={state.leader_id}
           project_id={props.match.params.id}/>
       </section>

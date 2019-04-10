@@ -47,10 +47,10 @@ export const Input = props => {
   )
 }
 
-export const Btn = ({...props}) => {
+export const Btn = (props) => {
   return props.visible ? '' : (
     <button
-      {...props}
+      onClick={props.onClick}
       className={`${styles.btn} ${props.className}`}>
       {props.title}
     </button>

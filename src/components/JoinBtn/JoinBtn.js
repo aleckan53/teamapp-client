@@ -1,13 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Btn } from '../Basic/Basic'
 import RequestsService from '../../services/RequestsService'
 
 const JoinBtn = props => {
-  const handleJoin = (leader_id, project_id) => {
-    RequestsService.sendJoinRequest(leader_id, project_id)
+  const [sent, setSent] = useState(true)
+
+  const handleJoin = (lead, proj) => {
+    setSent(true)
+    RequestsService.sendJoinRequest(lead, proj)
   }
 
-  return (
+  return sent ? '' : (
     <Btn
       title='Join project'
       onClick={()=> handleJoin(props.leader_id, props.project_id)} 

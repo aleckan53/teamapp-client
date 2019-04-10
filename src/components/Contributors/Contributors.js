@@ -37,6 +37,7 @@ const Contributors = props => {
         { outgoing.some(r => r.project_id === Number(props.project_id)) || 
           state.userJoined ? '' : (
           <JoinBtn
+            {...props}
             leader_id={props.leader_id}
             project_id={props.project_id}/>
         )}

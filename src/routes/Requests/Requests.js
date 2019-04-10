@@ -22,6 +22,7 @@ const Requests = props => {
 
     src.onmessage = ev => {
       const data = JSON.parse(ev.data)
+      console.log(data)
       // filters out 'accepted' and 'declined' requests
       const pendingOnly = data.incoming.filter(r => r.status === 'Pending')
       
