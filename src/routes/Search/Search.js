@@ -33,21 +33,14 @@ const Search = props => {
 
   const loadProjects = (term="", page=1) => {
     ProjectsService.getAllProjects(term, page)
-      .then(res => {
-        if(page > 1) {
-          setState({
-            ...state,
-            projects: [...state.projects, ...res.projects],
-            totalProjects: res.count
-          })
-        } else {
-          setState({
-            ...state,
-            projects: res.projects,
-            totalProjects: res.count,
-          })
-        }
-      })
+      .then(res => setState({
+        ...state,
+        totalProjects: res.count,
+        // prevents bubbling up the state
+        projects: page > 1 
+          ? [...state.projects, ...res.projects]
+          : res.projects 
+      }))
   }
   
   const nextPage = () => {
