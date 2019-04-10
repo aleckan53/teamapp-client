@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { Header, Form, LabeledInput, LabeledTextArea, Btn, Msg } from '../../components/Basic/Basic';
 import ProjectsContext from '../../context/ProjectsContext'
-import ProjectsService from '../../services/ProjectService';
+import ProjectsService from '../../services/ProjectService'
 
 const EditProject = props => {
   const context = useContext(ProjectsContext)
@@ -9,7 +9,7 @@ const EditProject = props => {
 
   const [state, setState] = useState({})
 
-  useEffect(()=> {
+  useEffect(() => {
     if(!Object.entries(currentProject).length) {
       ProjectsService.getProjectById(props.match.params.id)
         .then(res => {
@@ -28,7 +28,7 @@ const EditProject = props => {
 
   const handleSubmit = e => {
     e.preventDefault()
-    if(type==='save') {
+    if(type === 'save') {
       ProjectsService.updateProject(context, props, state)
     } else {
       ProjectsService.deleteProject(context, props, state)
@@ -40,7 +40,7 @@ const EditProject = props => {
       <Header h1='Edit Project'/>
       <Form
         id='editProject'
-        onSubmit={e=> handleSubmit(e)}>
+        onSubmit={e => handleSubmit(e)}>
         <LabeledInput
           value={state.title || ''}
           onChange={e=> setState({...state, title: e.target.value})}
@@ -48,21 +48,21 @@ const EditProject = props => {
           label='Title'/>
         <LabeledInput
           value={state.img}
-          onChange={e=> setState({...state, img: e.target.value})}
+          onChange={e => setState({...state, img: e.target.value})}
           id='img'
           label='Image'/>
         <LabeledTextArea
           value={state.description}
-          onChange={e=> setState({...state, description: e.target.value})}  
+          onChange={e => setState({...state, description: e.target.value})}  
           id='description'
           label='Description'/>
         <Btn
-          onClick={e=> setType(e.target.name)}
+          onClick={e => setType(e.target.name)}
           name='save'
           title='Save changes'
           type='submit'/>
         <Btn
-          onClick={e=> setType(e.target.name)}
+          onClick={e => setType(e.target.name)}
           name='delete'
           title='Delete project'
           type='submit'/>

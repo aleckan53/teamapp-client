@@ -1,15 +1,12 @@
-.input {
-  height: 2rem;
-}
-
 .form {
   margin: 0 auto;
 }
 
-.regForm input { 
+.form input { 
   margin-bottom: 1rem;
 }
 
-.regForm textarea {
+.form .btn {
   margin-top: 0;
 }
+

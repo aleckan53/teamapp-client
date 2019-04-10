@@ -1,6 +1,7 @@
 import React from 'react'
-import { LabeledInput, Form, Btn, TextArea, Input} from '../Basic/Basic'
+import { Msg, Form, Btn, TextArea, Input} from '../Basic/Basic'
 import styles from './LoginForm.module.css'
+import { Link } from 'react-router-dom'
 
 export const LoginForm = props => {
   return (
@@ -8,19 +9,22 @@ export const LoginForm = props => {
       id="loginFrom"
       className={styles.form}
       onSubmit={props.handleSubmit}>
-      <LabeledInput
-        className={styles.input}
+      <Input
         id="email"
         type="text"
-        label="Email"/>
-      <LabeledInput
-        className={styles.input}
+        placeholder="Email"/>
+      <Input
         id="password"
         type="password"
-        label="Password"/>
+        placeholder="Password"/>
       <Btn
-        title="Login"
+        className={styles.btn}
+        title="Submit"
         type="submit"/>
+      <Link to='/signup'>
+        <Msg
+          text='Sign up'/>
+      </Link>
     </Form>
   )
 }
@@ -28,7 +32,7 @@ export const LoginForm = props => {
 export const SignUpForm = props => {
   return (
     <Form
-      className={styles.regForm}
+      className={styles.form}
       id="signUpForm"
       handleSubmit={props.handleSubmit}>
       <Input
@@ -62,11 +66,13 @@ export const SignUpForm = props => {
         type="text"
         onChange={props.onChange.setAvatar}/>
       <TextArea
-        />
+        placeholder="Write a few words about yourself"/>
       <Btn
-        placeholder='Write '
-        title="Create profile"
+        title="Submit"
         type="submit"/>
+      <Link to='/login'>
+        <Msg text='Log in'/>
+      </Link>
     </Form>
   )
 }

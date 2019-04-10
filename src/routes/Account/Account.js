@@ -1,16 +1,13 @@
 import React, { useContext } from 'react'
 import UsersContext from '../../context/UsersContext'
 import Hero from '../../components/Hero/Hero'
-import { Btn, HeaderBtn, TitledText } from '../../components/Basic/Basic'
+import { HeaderBtn, TitledText } from '../../components/Basic/Basic'
 import TokenService from '../../services/TokenService'
-import { IoMdSettings as Icon } from 'react-icons/io' 
-import { Link } from 'react-router-dom' 
+import { IoMdExit as Icon } from 'react-icons/io' 
 import styles from './Account.module.css'
 
 const Account = props => {
-
 const context = useContext(UsersContext)
-
 const handleLogOut = () => {
   TokenService.clearAuthToken()
   props.history.push('/account')
@@ -20,20 +17,15 @@ return <div className="Account">
     <Hero
       img={context.userInfo.avatar}
       heading={`${context.userInfo.first_name} ${context.userInfo.last_name}`}>
-      <Link to={`/user/${props.match.params.id}/edit-profile`}>
-        <HeaderBtn 
-          icon={Icon}
-          className={styles.editBtn}/>
-      </Link>
+      <HeaderBtn 
+        onClick={() => handleLogOut()}
+        icon={Icon}
+        className={styles.editBtn}/>
     </Hero>
       <section>
         <TitledText
           title="About"
           content={context.userInfo.about}/> 
-        <Btn
-          onClick={()=>handleLogOut()}
-          type="button"
-          title="Log out"/>
       </section>
   </div>
 }

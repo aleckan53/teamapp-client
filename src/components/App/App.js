@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import ProjectDetails from '../../routes/ProjectDetails/ProjectDetails'
 import ProjectsList from '../../routes/ProjectsList/ProjectsList'
@@ -12,8 +12,13 @@ import PrivateRoute from '../Routes/PrivateRoute'
 import AddProject from '../../routes/AddProject/AddProject'
 import EditProject from '../../routes/EditProject/EditProject'
 import Requests from '../../routes/Requests/Requests'
+import ThemeContext from '../../context/ThemeContext'
+import { CheckBox } from '../Basic/Basic'
 
 const App = () => {
+
+  const theme = useContext(ThemeContext)
+
   return (
     <div className="App">
       <NavBar/>
@@ -31,6 +36,9 @@ const App = () => {
           <Route component={NotFound}/>
         </Switch>
       </main>
+      <CheckBox 
+        checked={theme.dark}
+        onChange={() => theme.toggle()}/>
     </div>
   )
 }

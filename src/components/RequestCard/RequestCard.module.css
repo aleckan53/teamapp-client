@@ -2,16 +2,18 @@
   box-sizing: border-box;
   width: 100%;
   height: 80px;
-  box-shadow: 0px 3px 15px -3px var(--black-30);
+  box-shadow: 0px 3px 15px -3px var(--box-shadow);
   border-radius: 10px;
   overflow: hidden;
   display: grid;
   grid-template-columns: 15% auto 20%;
   grid-template-rows: 100%;
   margin-bottom: 1.2rem;
-  border: 1px solid white;
+  border: 1px solid var(--bg-color);
   user-select: none;
 }
+
+
 
 .extended {
   height: 200px;
@@ -20,26 +22,26 @@
 .reqCard p {
   margin: auto;
   width: 100%;
-  color: var(--gray-100);
+  color: var(--sub-text2);
   font-family: 'Helvetica Neue';
   font-size: 0.8rem;
 }
 .reqCard p:nth-child(1) {
   margin: auto;
   width: 100%;
-  color: black;
+  color: var(--main-text);
   font-family: 'Helvetica Neue';
   font-size: 0.9rem;
 }
 
 .iconUp {
-  color: blue;
+  color: var(--color1);
   font-size: 30px;
   margin: auto;
 }
 
 .iconDown {
-  color: green;
+  color: var(--color2);
   font-size: 30px;
   margin: auto;
 }

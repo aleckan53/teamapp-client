@@ -6,7 +6,11 @@ import { CustomLoader } from '../Basic/Basic'
 
 const ProjectCard = props => {
   const context = useContext(ProjectsContext)
-  const bgImage = {backgroundImage: `url(${props.project.img})`}
+  const bgImage = {
+    backgroundImage: `linear-gradient(rgba(0,0,0,0.25) 1%, rgba(0,0,0,0) 65%), url(${props.project.img})`,
+    backgroundPosition: `center`,
+    backgroundSize: `cover`
+  }
   return (
     <Link 
       onClick={()=> context.setCurrentProject(props.project)}

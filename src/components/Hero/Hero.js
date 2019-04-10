@@ -7,7 +7,9 @@ import { HeaderBtn } from '../Basic/Basic'
 const Hero = props => {
 
   const backgroundImgStyle = {
-    backgroundImage: `url(${props.img})`
+    backgroundImage: `linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0) 65%, rgba(0,0,0,0.25) 100%), url(${props.img})`,
+    backgroundPosition: `center`,
+    backgroundSize: `cover`
   }
 
   return (
@@ -22,6 +24,7 @@ const Hero = props => {
             className={styles.editBtn}/>
         </Link>
       }
+
       {props.children}
     </header>
   )

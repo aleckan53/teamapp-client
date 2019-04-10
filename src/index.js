@@ -4,15 +4,18 @@ import App from './components/App/App'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { ProjectsProvider } from './context/ProjectsContext'
 import { UsersProvider } from './context/UsersContext'
+import { ThemeProvider } from './context/ThemeContext'
 import './index.css'
 
 ReactDOM.render(
   <Router>
-    <UsersProvider>
-      <ProjectsProvider>
-        <App/>
-      </ProjectsProvider>
-    </UsersProvider>
+    <ThemeProvider>
+      <UsersProvider>
+        <ProjectsProvider>
+          <App/>
+        </ProjectsProvider>
+      </UsersProvider>
+    </ThemeProvider>
   </Router>,
   document.getElementById('root')
 );

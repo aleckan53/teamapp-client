@@ -15,15 +15,41 @@ code {
 
 a {
   text-decoration: none;
+  user-select: none;
+}
+
+.active {
+  color: var(--main-color) !important;
+}
+
+html {
+  background: var(--bg-color);
+}
+
+h3 {
+  color: var(--main-text-80)
+}
+
+p {
+  color: var(--main-text-90)
 }
 
 :root{
-  --main-color: #ff2e63;
-  --gray-30: rgba(169,169,169,0.3);
-  --gray-100: rgba(169,169,169,1);
-  --padding-side: 0 5% 2%;
-  --subText-color: white;
-  --black-30: rgba(0, 0, 0, 0.3);
+--bg-color: white;
+--main-color: #ff2e63;
+--main-text: black;
+--main-text-30: rgba(0,0,0,0.3);
+--main-text-60: rgba(0,0,0,0.6);
+--main-text-80: rgba(0,0,0,0.8);
+--sub-text: white;
+--sub-text2: rgba(169,169,169,1);
+--btn-body-1: white;
+--btn-body-2: #ff2e63;
+--border-color: rgba(169,169,169,0.3);
+--box-shadow: rgba(169,169,169,0.3);
+--color1: blue;
+--color2: green;
+--padding-side: 0 5% 2%;
 }
 
 section {
@@ -31,10 +57,14 @@ section {
   padding: 0 5% 2%;
   box-sizing: border-box;
 }
-
+/* a:focus,
 input:focus,
+button:focus,
 select:focus,
-textarea:focus,
-button:focus {
-    outline: none;
-}
+textarea:focus {
+  outline-color: var(--main-color);
+  border-radius: 3px;
+  outline: 0;
+  box-shadow: 0 0 0 3px green;
+} */
+

@@ -1,6 +1,7 @@
 import React from 'react'
 import styles from './Basic.module.css'
 import Loader from 'react-loader-spinner'
+import { IoMdMoon as Moon, IoMdSunny as Sun } from 'react-icons/io'
 
 export const Header = props => {
   return (
@@ -14,7 +15,7 @@ export const Header = props => {
 export const HeaderBtn = props => {
   const Icon = props.icon
   return (
-    <Icon className={`${styles.headerBtn} ${props.className}`}>
+    <Icon onClick={props.onClick} className={`${styles.headerBtn} ${props.className}`}>
       {props.children}
     </Icon>
   )
@@ -115,5 +116,23 @@ export const TitledText = props => {
       <h3>{props.title}</h3>
       <p>{props.content}</p>
     </>
+  )
+}
+
+export const CheckBox = props => {
+  return (
+    <div className={styles.checkbox}>
+      <input 
+        style={{
+          background: `image(${Moon})`
+        }}
+        checked={props.checked}
+        onChange={props.onChange}
+        type='checkbox'/>
+      <Moon 
+        className={`${styles.icon} ${!props.checked ? '' : styles.checked}`}/>
+      <Sun
+        className={`${styles.icon} ${props.checked ? '' : styles.checked}`}/>
+    </div>
   )
 }

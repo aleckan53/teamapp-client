@@ -4,6 +4,7 @@ import TokenService from '../../services/TokenService'
 import UsersContext from '../../context/UsersContext'
 import ProjectsContext from '../../context/ProjectsContext'
 import AuthApiService from '../../services/AuthApiService'
+import { Header } from '../../components/Basic/Basic'
 
 const LoginPage = props => {
   const usersContext = useContext(UsersContext)
@@ -39,6 +40,7 @@ const LoginPage = props => {
 
   return (
     <section>
+      <Header h1="Log in"/>
       <LoginForm
         handleSubmit={handleSubmitJwtAuth}/>
     </section>
