@@ -10,12 +10,25 @@ const Search = props => {
     currentPage: 1,
     searchTerm: '',
     showLoader: false,
-    term: ''
   })
 
-  // TODO: make api request when user done typing
+  // prevents unnecessary api calls when typing
+  const [timer, setTimer] = useState()
+  const [typing, setTyping] = useState(false)
+
   useEffect(() => { 
-    loadProjects(state.searchTerm, state.currentPage)
+    if(!state.searchTerm.length) {
+      clearTimeout(timer)
+      loadProjects(state.searchTerm, state.currentPage)
+      setTyping(false)
+    } else {
+      clearTimeout(timer)
+      setTyping(true)
+      setTimer(setTimeout(() => {
+        loadProjects(state.searchTerm, state.currentPage)
+        setTyping(false)
+      }, 800))  
+    }
   }, [state.currentPage, state.searchTerm])
 
   const loadProjects = (term="", page=1) => {
@@ -38,7 +51,7 @@ const Search = props => {
   }
   
   const nextPage = () => {
-    return state.currentPage === Math.ceil(state.totalProjects/5)
+    return state.currentPage === Math.ceil(state.totalProjects/5) // 5 = api response limit
       ? state.currentPage
       : setState({
         ...state,
@@ -46,24 +59,20 @@ const Search = props => {
       })
   }
 
-  const scrollTop = () => {
-    return document.getElementById('Scrollable').scrollTop = 0
-  }
-
   return (
     <section className="Search">
       <Header h1="Search"/>
         <Input 
+          showLoader={typing}
           value={state.searchTerm}
           style={{ paddingRight: '3rem' }}
           onChange={e => {
+            document.getElementById('Scrollable').scrollTop = 0
             setState({
               ...state,
               searchTerm: e.target.value,
               currentPage: 1
-            })
-            scrollTop()
-          }}
+            })}}
           type="text"/>
       <Scrollable
         next={() => nextPage()}

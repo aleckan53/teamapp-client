@@ -92,11 +92,17 @@
   color: var(--sub-text);
   border: 1px solid var(--border-color);
   cursor: pointer;
+  transition: all .5s ease;
 }
 
 .btn:nth-of-type(2) {
   background: var(--btn-body-1);
   color: var(--main-color);
+}
+
+.diabled {
+  transition: all .5s ease;
+  background: gray;
 }
 
 .msg {

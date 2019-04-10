@@ -30,44 +30,48 @@ export const LoginForm = props => {
 }
 
 export const SignUpForm = props => {
+  // console.log(props)
   return (
     <Form
       className={styles.form}
       id="signUpForm"
-      handleSubmit={props.handleSubmit}>
+      onSubmit={props.handleSubmit}>
       <Input
         placeholder="Email *"
-        value={props.value.email}
+        value={props.state.email}
         id="email"
         type="text"
-        onChange={props.onChange.setEmail}/>
+        onChange={e => props.onChange({...props.state, email: e.target.value})}/>
       <Input
         placeholder="Password *"
-        value={props.value.password}
+        value={props.state.password}
         id="password"
         type="password"
-        onChange={props.onChange.setPassword}/>
+        onChange={e => props.onChange({...props.state, password: e.target.value})}/>
       <Input
         placeholder="First Name *"
-        value={props.value.first_name}
+        value={props.state.first_name}
         id="first_name"
         type="text"
-        onChange={props.onChange.setFirst_name}/>
+        onChange={e => props.onChange({...props.state, first_name: e.target.value})}/>
       <Input
         placeholder="Last Name *"
-        value={props.value.last_name}
+        value={props.state.last_name}
         id="last_name"
         type="text"
-        onChange={props.onChange.setLast_name}/>
+        onChange={e => props.onChange({...props.state, last_name: e.target.value})}/>
       <Input
         placeholder="Profile image"
-        value={props.value.avatar || ''}
+        value={props.state.avatar || ''}
         id="avatar"
         type="text"
-        onChange={props.onChange.setAvatar}/>
+        onChange={e => props.onChange({...props.state, avatar: e.target.value})}/>
       <TextArea
+        value={props.state.about}
+        onChange={e => props.onChange({...props.state, about: e.target.value})}
         placeholder="Write a few words about yourself"/>
       <Btn
+        disabled={props.formValid}
         title="Submit"
         type="submit"/>
       <Link to='/login'>

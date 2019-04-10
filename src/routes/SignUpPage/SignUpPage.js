@@ -1,27 +1,41 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { SignUpForm } from '../../components/LoginForm/LoginForm'
 import AuthApiService from '../../services/AuthApiService'
-import { Header } from '../../components/Basic/Basic';
+import { Header } from '../../components/Basic/Basic'
 
 const SignUpPage = props => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [first_name, setFirst_name] = useState('')
-  const [last_name, setLast_name] = useState('')
-  const [avatar, setAvatar] = useState('')
+
+  const [state, setState] = useState({
+    email: '',
+    password: '',
+    first_name: '',
+    last_name: '',
+    avatar: '',
+    about: '',
+  })
+
+  const [valid, setValid] = useState({
+    form: false,
+  })
+
+  const [timer, setTimer] = useState()
+
+  // dummy check
+  useEffect(() => {
+    clearTimeout(timer)
+    setTimer(setTimeout(() => {
+      console.log('hi')
+    }, 2000))
+  }, [state])
 
   const handleSubmit = (e) => {
     e.preventDefault()
-
-    AuthApiService.postUser({
-      email, password, first_name, last_name, avatar
-    })
-      .then(res=> {
+    AuthApiService.postUser(state)
+      .then(res => {
         if(res.ok) {
           props.history.push('/login')
         }
       })
-      .catch(err=> console.log(err))
     
   }
 
@@ -29,9 +43,10 @@ const SignUpPage = props => {
     <section>
       <Header h1="Create profile"/>
       <SignUpForm
-        handleSubmit={e=> handleSubmit(e)}
-        value={{ email, password, first_name, last_name, avatar }}
-        onChange={{ setEmail, setPassword, setFirst_name, setLast_name, setAvatar }}/>
+        formValid={!valid.form}
+        handleSubmit={e => handleSubmit(e)}
+        state={state}
+        onChange={setState}/>
     </section>
   )
 }

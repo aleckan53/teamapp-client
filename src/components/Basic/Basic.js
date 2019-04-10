@@ -39,20 +39,23 @@ export const Input = props => {
   return (
     <div className={styles.inputContainer}>
       <input
+        value={props.value}
+        onChange={props.onChange}
+        style={props.style}
         name={props.id}
-        className={`${styles.input} ${props.className}`}
-        {...props}/>
-      {!props.loading ? '' : <CustomLoader/>}
+        className={`${styles.input} ${props.className}`}/>
+      {!props.showLoader ? '' : <CustomLoader/>}
     </div>
   )
 }
 
 export const Btn = (props) => {
-  return props.visible ? '' : (
+  return (
     <button
+      disabled={props.disabled}
       onClick={props.onClick}
-      className={`${styles.btn} ${props.className}`}>
-      {props.title}
+      className={`${styles.btn} ${props.className} ${props.disabled ? styles.diabled : ''}`}>
+      {props.disabled ? 'Please fill out required fields *' : props.title}
     </button>
   )
 }

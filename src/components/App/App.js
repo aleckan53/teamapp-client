@@ -16,7 +16,6 @@ import ThemeContext from '../../context/ThemeContext'
 import { CheckBox } from '../Basic/Basic'
 
 const App = () => {
-
   const theme = useContext(ThemeContext)
 
   return (
