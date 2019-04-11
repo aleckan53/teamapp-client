@@ -1,76 +1,28 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 
 const ProjectsContext = React.createContext({
-  error: null,
   currentProject: {},
-  projectsList: [],
   setCurrentProject: ()=>{},
-  setProjectsList: ()=>{},
-  addProject: ()=>{},
-  updateProject: ()=>{},
-  deleteProject: ()=>{},
 })
 
 export default ProjectsContext
 
-export class ProjectsProvider extends Component {
-  state = {
-    error: null,
+export const ProjectsProvider = props => {
+  const [state, setState] = useState({
     currentProject: {},
-    projectsList: [],
-  }
+  })
 
-  setCurrentProject = currentProject => {
-    this.setState({currentProject})
+  const setCurrentProject = currentProject => {
+    setState({currentProject})
   }
-
-  setProjectsList = projectsList => {
-    this.setState({projectsList})
-  }
-
-  addProject = project => {
-    this.setState({
-      projectsList: [...this.state.projectsList, project]
-    })
-  }
-
-  updateProject = project => {
-    const oldProjects = this.state.projectsList.filter(p => 
-      p.id !== project.id
-    )
-    // change to sort by rating
-    this.setState({
-      projectsList: [...oldProjects, project].sort((a,b) => (a.id>b.id) ? 1 : ((b.id>a.id) ? -1 : 0))
-    })
-  }
-
-  deleteProject = projectId => {
-    const newProjectsList = this.state.projectsList.filter(p =>
-      p.id !== projectId 
-    )
-
-    this.setState({
-      projectsList: [...newProjectsList]
-    })
-  }
-
-  render() {
-    const value = {
-      error: this.state.error,
-      currentProject: this.state.currentProject,
-      projectsList: this.state.projectsList,
-      setCurrentProject: this.setCurrentProject,
-      setProjectsList: this.setProjectsList,
-      addProject: this.addProject,
-      updateProject: this.updateProject,
-      deleteProject: this.deleteProject,
-    }
-    
-    return (
-      <ProjectsContext.Provider value={value}>
-        {this.props.children}
-      </ProjectsContext.Provider>
-    )
-  }
+  
+  return (
+    <ProjectsContext.Provider value={{
+      currentProject: state.currentProject,
+      setCurrentProject: setCurrentProject,  
+    }}>
+      {props.children}
+    </ProjectsContext.Provider>
+  )
 }
 

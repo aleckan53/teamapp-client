@@ -48,7 +48,6 @@ const ProjectsService = {
       }})
       .then(res => !res.ok ? res.json().then(e => Promise.reject(e)) : res.json())
       .then(res => {
-        context.updateProject(res)
         context.setCurrentProject(res)
         routerProps.history.push(`/projects/${res.id}`)
       })
@@ -64,7 +63,6 @@ const ProjectsService = {
         if(!res.ok) {
           return res.json().then(e => Promise.reject(e))
         }
-        context.deleteProject(project.id)
         routerProps.history.push('/projects')
       })
       .catch(err => console.error(err))
