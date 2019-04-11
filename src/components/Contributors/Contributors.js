@@ -1,22 +1,18 @@
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './Contributors.module.css'
 import ProjectsService from '../../services/ProjectService'
 import JoinBtn from '../JoinBtn/JoinBtn'
-import UsersContext from '../../context/UsersContext'
 
 const Contributors = props => {
-  const outgoing = useContext(UsersContext).userInfo.outgoing || []
   const [state, setState] = useState({
     list: [],
     userJoined: true,
-    userAwaitsRequest: true,
   })
 
   useEffect(()=> {
     ProjectsService.getContributorsList(props.project_id)
       .then(res=> setState({
         ...res,
-        userAwaitsRequest: outgoing.some(r => r.project_id === Number(props.project_id))
       }))
   }, [])
 
@@ -24,18 +20,15 @@ const Contributors = props => {
     <div>
       <h3>Contributors</h3>
       <div className={styles.contributorsList}>
-        {state.list.map((c,i)=> {
-          return (
-            <Contributor
-              key={i}
-              img={c.avatar}
-              name={`${c.first_name} ${c.last_name}`}
-              title={c.title}/>
-          )
-        })}
+        { state.list.map((c,i)=> (
+          <Contributor
+            key={i}
+            img={c.avatar}
+            name={`${c.first_name} ${c.last_name}`}
+            title={c.title}/>
+        ))}
       </div>
-        { outgoing.some(r => r.project_id === Number(props.project_id)) || 
-          state.userJoined ? '' : (
+        { state.userJoined ? '' : (
           <JoinBtn
             {...props}
             leader_id={props.leader_id}

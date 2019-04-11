@@ -1,8 +1,4 @@
 import React, { Component } from 'react'
-import ProjectsService from '../services/ProjectService'
-import TokenService from '../services/TokenService'
-
-import UsersContext from './UsersContext';
 
 const ProjectsContext = React.createContext({
   error: null,
@@ -13,7 +9,6 @@ const ProjectsContext = React.createContext({
   addProject: ()=>{},
   updateProject: ()=>{},
   deleteProject: ()=>{},
-  getUserProjects: ()=>{},
 })
 
 export default ProjectsContext
@@ -23,20 +18,6 @@ export class ProjectsProvider extends Component {
     error: null,
     currentProject: {},
     projectsList: [],
-  }
-
-  static contextType = UsersContext
-
-  componentDidMount() {
-    if (TokenService.getAuthToken()) {
-      this.getUserProjects()
-    }
-  }
-
-  getUserProjects = () => {
-    ProjectsService.getUserProjectsList()
-      .then(res=> this.setProjectsList(res))
-      .catch(err=> console.log(err))
   }
 
   setCurrentProject = currentProject => {
@@ -52,6 +33,7 @@ export class ProjectsProvider extends Component {
       projectsList: [...this.state.projectsList, project]
     })
   }
+
   updateProject = project => {
     const oldProjects = this.state.projectsList.filter(p => 
       p.id !== project.id
@@ -60,8 +42,8 @@ export class ProjectsProvider extends Component {
     this.setState({
       projectsList: [...oldProjects, project].sort((a,b) => (a.id>b.id) ? 1 : ((b.id>a.id) ? -1 : 0))
     })
-
   }
+
   deleteProject = projectId => {
     const newProjectsList = this.state.projectsList.filter(p =>
       p.id !== projectId 
@@ -82,8 +64,8 @@ export class ProjectsProvider extends Component {
       addProject: this.addProject,
       updateProject: this.updateProject,
       deleteProject: this.deleteProject,
-      getUserProjects: this.getUserProjects,
     }
+    
     return (
       <ProjectsContext.Provider value={value}>
         {this.props.children}

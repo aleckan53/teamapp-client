@@ -1,14 +1,10 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { LoginForm } from '../../components/LoginForm/LoginForm'
 import TokenService from '../../services/TokenService'
-import UsersContext from '../../context/UsersContext'
-import ProjectsContext from '../../context/ProjectsContext'
 import AuthApiService from '../../services/AuthApiService'
 import { Header } from '../../components/Basic/Basic'
 
 const LoginPage = props => {
-  const usersContext = useContext(UsersContext)
-  const projectsContext = useContext(ProjectsContext)
 
   const handleSubmitJwtAuth = e => {
     e.preventDefault()
@@ -22,9 +18,6 @@ const LoginPage = props => {
         email.value = ''
         password.value = ''
         TokenService.saveAuthToken(res.authToken)
-
-        usersContext.getUserInfo()
-        projectsContext.getUserProjects()    
 
         onLoginSuccess()
       })

@@ -1,14 +1,21 @@
-import React, { useContext } from 'react'
-import UsersContext from '../../context/UsersContext'
+import React, { useEffect, useState } from 'react'
 import Hero from '../../components/Hero/Hero'
 import { HeaderBtn, TitledText } from '../../components/Basic/Basic'
 import TokenService from '../../services/TokenService'
 import { IoMdExit as Icon } from 'react-icons/io' 
 import styles from './Account.module.css'
 import Social from '../../components/Social/Social'
+import UsersService from '../../services/UsersService'
 
 const Account = props => {
-const context = useContext(UsersContext)
+
+const [state, setState] = useState({})
+
+useEffect(() => {
+  UsersService.getUserInfo()
+    .then(res => setState(res))
+}, [])
+
 const handleLogOut = () => {
   TokenService.clearAuthToken()
   props.history.push('/account')
@@ -17,8 +24,8 @@ const handleLogOut = () => {
 return (
   <div className="Account">
     <Hero
-      img={context.userInfo.avatar}
-      heading={`${context.userInfo.first_name} ${context.userInfo.last_name}`}>
+      img={state.avatar}
+      heading={`${state.first_name} ${state.last_name}`}>
       <HeaderBtn 
         onClick={() => handleLogOut()}
         icon={Icon}
@@ -27,7 +34,7 @@ return (
     <section>
       <TitledText
         title="About"
-        content={context.userInfo.about}/> 
+        content={state.about}/> 
       <Social/>
     </section>
   </div>

@@ -27,7 +27,7 @@ const Search = props => {
       setTimer(setTimeout(() => {
         loadProjects(state.searchTerm, state.currentPage)
         setTyping(false)
-      }, 800))  
+      }, 600))  
     }
   }, [state.currentPage, state.searchTerm])
 

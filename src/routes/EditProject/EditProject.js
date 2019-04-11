@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react'
-import { Header, Form, LabeledInput, LabeledTextArea, Btn, Msg } from '../../components/Basic/Basic';
+import { Header, Form, LabeledInput, LabeledTextArea, Btn, Msg } from '../../components/Basic/Basic'
 import ProjectsContext from '../../context/ProjectsContext'
 import ProjectsService from '../../services/ProjectService'
 
@@ -28,10 +28,10 @@ const EditProject = props => {
 
   const handleSubmit = e => {
     e.preventDefault()
-    if(type === 'save') {
-      ProjectsService.updateProject(context, props, state)
-    } else {
+    if(type === 'delete') {
       ProjectsService.deleteProject(context, props, state)
+    } else {
+      ProjectsService.updateProject(context, props, state)
     }
   }
 
@@ -42,11 +42,13 @@ const EditProject = props => {
         id='editProject'
         onSubmit={e => handleSubmit(e)}>
         <LabeledInput
+          type='text'
           value={state.title || ''}
-          onChange={e=> setState({...state, title: e.target.value})}
+          onChange={e => setState({...state, title: e.target.value})}
           id='title'
           label='Title'/>
         <LabeledInput
+          type='text'
           value={state.img}
           onChange={e => setState({...state, img: e.target.value})}
           id='img'

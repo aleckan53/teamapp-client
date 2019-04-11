@@ -21,17 +21,19 @@ const AddProject = props => {
         h1='Create project'/>
       <Form 
         id='addProject'
-        onSubmit={e=> handleCreateProject(e)}>
+        onSubmit={e => handleCreateProject(e)}>
         <LabeledInput
-          onChange={e=> setState({...state, title: e.target.value})}
+          type='text'
+          onChange={e => setState({...state, title: e.target.value})}
           id='title'
           label='Title'/>
         <LabeledInput
-          onChange={e=> setState({...state, img: e.target.value})}
+          type='text'
+          onChange={e => setState({...state, img: e.target.value})}
           id='img'
           label='Image'/>
         <LabeledTextArea
-          onChange={e=> setState({...state, description: e.target.value})}  
+          onChange={e => setState({...state, description: e.target.value})}  
           id='description'
           label='Description'/>
         <Btn

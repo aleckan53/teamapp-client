@@ -2,7 +2,6 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import ProjectsList from './ProjectsList'
 import { BrowserRouter as Router } from 'react-router-dom'
-import ProjectsContext from '../../context/ProjectsContext'
 import renderer from 'react-test-renderer'
 
 describe('ProjectsList component', ()=> {

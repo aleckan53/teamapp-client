@@ -39,6 +39,7 @@ export const Input = props => {
   return (
     <div className={styles.inputContainer}>
       <input
+        type={props.type}
         value={props.value}
         onChange={props.onChange}
         style={props.style}
@@ -52,6 +53,7 @@ export const Input = props => {
 export const Btn = (props) => {
   return (
     <button
+      name={props.name}
       disabled={props.disabled}
       onClick={props.onClick}
       className={`${styles.btn} ${props.className} ${props.disabled ? styles.diabled : ''}`}>
