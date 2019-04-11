@@ -25,6 +25,7 @@ const LoginPage = props => {
   }
 
   const onLoginSuccess = () => {
+    props.setAuthorized(true)
     const { location, history } = props
     const destination = (location.state || {}).from || '/account'
 

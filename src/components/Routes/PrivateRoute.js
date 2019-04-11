@@ -13,7 +13,10 @@ const PrivateRoute = ({component, ...props}) => {
               pathname: '/login',
               state: {from: renderProps.location}
             }}/>
-          : <Component {...renderProps}/>
+          : <Component 
+            {...renderProps} 
+            data={props.data}
+            setData={props.setData}/>
       )} 
     />
   )
