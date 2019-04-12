@@ -15,17 +15,13 @@ const SignUpPage = props => {
   })
 
   const [valid, setValid] = useState({
-    form: false,
+    form: true,
   })
 
   const [timer, setTimer] = useState()
 
   // dummy check
   useEffect(() => {
-    clearTimeout(timer)
-    setTimer(setTimeout(() => {
-      console.log('hi')
-    }, 2000))
   }, [state])
 
   const handleSubmit = (e) => {

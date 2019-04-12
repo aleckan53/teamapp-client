@@ -25,7 +25,7 @@ const ProjectsList = props => {
       </Header>
       {!state.length
         ? <Msg text="Your projects appear here"/>
-        : state.map((project, i)=>
+        : state.map((project, i) =>
             <ProjectCard 
               key={i} 
               project={project}/>)}

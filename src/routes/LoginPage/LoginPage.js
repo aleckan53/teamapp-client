@@ -25,10 +25,11 @@ const LoginPage = props => {
   }
 
   const onLoginSuccess = () => {
-    props.setAuthorized(true)
     const { location, history } = props
     const destination = (location.state || {}).from || '/account'
-
+    let idleTimeout
+    clearTimeout(idleTimeout)
+    setTimeout(() => TokenService.clearAuthToken(), 3.6e+6)
     history.push(destination)
   }
 

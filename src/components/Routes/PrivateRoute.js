@@ -14,9 +14,7 @@ const PrivateRoute = ({component, ...props}) => {
               state: {from: renderProps.location}
             }}/>
           : <Component 
-            {...renderProps} 
-            data={props.data}
-            setData={props.setData}/>
+            {...renderProps}/>
       )} 
     />
   )

@@ -39,6 +39,7 @@ export const Input = props => {
   return (
     <div className={styles.inputContainer}>
       <input
+        placeholder={props.placeholder}
         type={props.type}
         value={props.value}
         onChange={props.onChange}

@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useContext } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import ProjectDetails from '../../routes/ProjectDetails/ProjectDetails'
 import ProjectsList from '../../routes/ProjectsList/ProjectsList'
@@ -14,33 +14,9 @@ import EditProject from '../../routes/EditProject/EditProject'
 import Requests from '../../routes/Requests/Requests'
 import ThemeContext from '../../context/ThemeContext'
 import { CheckBox } from '../Basic/Basic'
-import UsersService from '../../services/UsersService'
-import TokenService from '../../services/TokenService'
 
 const App = () => {
   const theme = useContext(ThemeContext)
-
-  const [authorized, setAuthorized] = useState()
-
-  const [state, setState] = useState({
-    userInfo: {},
-  })
-
-
-  useEffect(() => {
-    if(TokenService.hasAuthToken()) {
-      setAuthorized(true)
-    } else {
-      setAuthorized(false)
-    }
-    if(authorized) {
-      console.log('yes')
-    } else {
-      console.log('no')
-    }
-    // UsersService.getUserInfo()
-    //   .then(res => setState({...state, userInfo: res}))
-  }, [authorized])
 
   return (
     <div className="App">
@@ -52,10 +28,10 @@ const App = () => {
           <PrivateRoute path='/projects/:id' component={ProjectDetails}/>
           <PrivateRoute path='/projects' component={ProjectsList}/>
           <PrivateRoute path='/requests' component={Requests}/>
-          <PrivateRoute path='/account' component={Account} data={state.userInfo} setData={setAuthorized}/>
+          <PrivateRoute path='/account' component={Account}/>
           <PrivateRoute path='/search' component={Search}/>
           <Route path="/signup" component={SignUpPage}/>
-          <Route path="/login" render={props => <LoginPage {...props} setAuthorized={setAuthorized}/>}/>
+          <Route path="/login" component={LoginPage}/>
           <Route component={NotFound}/>
         </Switch>
       </main>
