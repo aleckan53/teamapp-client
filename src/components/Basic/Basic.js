@@ -147,3 +147,19 @@ export const CheckBox = props => {
 export const Dot = props => {
   return <span className={`${styles.dot}`}></span>
 }
+
+export const Error = props => {
+  return !props.error ? '' : (
+    <div className={styles.error}>
+      <span>{props.msg || 'Something went wrong. Please try to go back or refresh the page'}</span>
+    </div>
+  )
+}
+
+export const ReqStatus = props => {
+  return (
+    <span className={`${styles.reqStatus} ${props.status}`}>
+      {props.status}
+    </span>
+  )
+}

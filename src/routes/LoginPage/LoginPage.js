@@ -1,10 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { LoginForm } from '../../components/LoginForm/LoginForm'
 import TokenService from '../../services/TokenService'
 import AuthApiService from '../../services/AuthApiService'
 import { Header } from '../../components/Basic/Basic'
+import EventsContext from '../../context/EventsContext'
 
 const LoginPage = props => {
+
+  const { setAuthorized } = useContext(EventsContext)
 
   const handleSubmitJwtAuth = e => {
     e.preventDefault()
@@ -25,11 +28,23 @@ const LoginPage = props => {
   }
 
   const onLoginSuccess = () => {
-    const { location, history } = props
-    const destination = (location.state || {}).from || '/account'
+    setAuthorized(true)
+    tokenExpiry()
+    redir(props)
+  }
+
+  const tokenExpiry = () => {
     let idleTimeout
     clearTimeout(idleTimeout)
-    setTimeout(() => TokenService.clearAuthToken(), 3.6e+6)
+    setTimeout(() => {
+      TokenService.clearAuthToken()
+      setAuthorized(false)
+    }, 3.6e+6)
+  }
+
+  const redir = props => {
+    const { location, history } = props
+    const destination = (location.state || {}).from || '/account'
     history.push(destination)
   }
 

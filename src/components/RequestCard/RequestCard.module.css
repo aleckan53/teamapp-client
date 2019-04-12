@@ -41,7 +41,7 @@
 }
 
 .iconDown {
-  color: var(--color2);
+  color: var(--main-color);
   font-size: 30px;
   margin: auto;
 }

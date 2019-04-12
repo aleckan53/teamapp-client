@@ -24,7 +24,7 @@ const ProjectDetails = props => {
       setCurrentProject({})
     }
   }, [])
-
+  
   return (
     <div className="ProjectDetails">
       <Hero 

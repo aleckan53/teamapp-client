@@ -33,16 +33,37 @@ const RequestsService = {
       headers: {
         'authorization': `bearer ${TokenService.getAuthToken()}`,
       }})
-      .then(res => !res.ok ? res.json().then(e => Promise.reject(e)) : res.json())
-      .then(res => console.log(res))
+      .then(res => !res.ok ? res.json().then(e => Promise.reject(e)) : '')
       .catch(err => console.log(err))
   },
-  getRequestsSse() {
-    const src = new EventSource(`${config.API_ENDPOINT}/sse`, {
+  getRequestsSse(authorized, cb, close) {
+    if(authorized) {
+      const src = new EventSource(`${config.API_ENDPOINT}/sse`, {
       headers: {
         'authorization': `bearer ${TokenService.getAuthToken()}`,
       }})
+
+      src.onmessage = ev => {
+        const data = JSON.parse(ev.data)
+        // filters out 'accepted' and 'declined' requests
+        const pendingOnly = data.incoming.filter(r => r.status === 'Pending')
+        cb({
+          incoming: pendingOnly,
+          outgoing: data.outgoing
+        })
+      }
+
+      src.onerror = () => {
+        src.close()
+      }
+
+      // doesn't work
+      if(close) {
+        src.close()
+      }
+              
     return src
+    }
   }
 }
 

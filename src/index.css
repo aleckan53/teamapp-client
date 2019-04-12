@@ -49,7 +49,20 @@ p {
 --box-shadow: rgba(169,169,169,0.3);
 --color1: blue;
 --color2: green;
+--color3: red;
 --padding-side: 0 5% 2%;
+}
+
+.Accepted {
+  color: var(--color2)
+}
+
+.Pending {
+  color: var(--sub-text2)
+}
+
+.Declined {
+  color: var(--color1)
 }
 
 section {

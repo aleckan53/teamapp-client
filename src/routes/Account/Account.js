@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import Hero from '../../components/Hero/Hero'
 import { HeaderBtn, TitledText } from '../../components/Basic/Basic'
 import TokenService from '../../services/TokenService'
@@ -6,8 +6,11 @@ import { IoMdExit as Icon } from 'react-icons/io'
 import styles from './Account.module.css'
 import Social from '../../components/Social/Social'
 import UsersService from '../../services/UsersService'
+import EventsContext from '../../context/EventsContext'
 
 const Account = props => {
+
+  const { setAuthorized } = useContext(EventsContext)
 
   const [state, setState] = useState({
     avatar: '',
@@ -23,7 +26,9 @@ const Account = props => {
 
   const handleLogOut = () => {
     TokenService.clearAuthToken()
+    setAuthorized(false)
     props.history.push('/account')
+    window.location.reload() // closes sse src !bad
   }
 
   return (

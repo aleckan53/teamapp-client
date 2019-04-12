@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './RequestCard.module.css'
-import { Btn } from '../Basic/Basic'
+import { Btn, ReqStatus } from '../Basic/Basic'
 import RequestsService from '../../services/RequestsService'
 import { IoMdArrowDown as Down, IoMdArrowUp as Up } from 'react-icons/io'
 import { Link } from 'react-router-dom'
@@ -37,7 +37,7 @@ const RequestCard = {
     return (
       <div className={styles.reqCard}>
         <div className={styles.btnContainer}>
-          <Up className={styles.iconUp}/>
+          <Up className={`${styles.iconUp} ${props.status}`}/>
         </div>
         <div className={styles.body}>
         <Link to={`/projects/${props.project_id}`}>
@@ -47,9 +47,10 @@ const RequestCard = {
           <p>{generateDate(props.created_at)}</p>
         </div>
         <div className={styles.btnContainer}>
+          <ReqStatus status={props.status}/>
           <Btn
             onClick={()=> RequestsService.deleteRequest(props.id)}
-            title={props.status}
+            title={props.status !== 'Pending' ? 'Archive' : 'Cancel'}
             className={styles.btn}/>
         </div>
       </div>
@@ -60,6 +61,7 @@ const RequestCard = {
 function generateDate(date) {
   return new Date(date)
     .toLocaleDateString('en-US', {
+      timeZone: 'UTC',
       hour12: true,
       hour: 'numeric',
       minute: 'numeric',

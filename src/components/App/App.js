@@ -14,14 +14,18 @@ import EditProject from '../../routes/EditProject/EditProject'
 import Requests from '../../routes/Requests/Requests'
 import ThemeContext from '../../context/ThemeContext'
 import { CheckBox } from '../Basic/Basic'
+import EventsContext from '../../context/EventsContext'
+import { Error } from '../Basic/Basic'
 
 const App = () => {
   const theme = useContext(ThemeContext)
+  const { error, errorMsg } = useContext(EventsContext)
 
   return (
     <div className="App">
       <NavBar/>
       <main>
+        <Error msg={errorMsg} error={error}/>
         <Switch>
           <PrivateRoute path='/projects/add' component={AddProject}/>
           <PrivateRoute path='/projects/:id/edit' component={EditProject}/>

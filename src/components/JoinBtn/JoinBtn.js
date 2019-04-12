@@ -6,7 +6,6 @@ const JoinBtn = props => {
 
   const handleJoin = (lead, proj) => {
     RequestsService.sendJoinRequest(lead, proj)
-    // props.history.push('/requests')
   }
   return (
     <Btn

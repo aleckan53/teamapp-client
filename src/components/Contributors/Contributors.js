@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import styles from './Contributors.module.css'
 import ProjectsService from '../../services/ProjectService'
 import JoinBtn from '../JoinBtn/JoinBtn'
+import EventsContext from '../../context/EventsContext'
+import { Msg } from '../Basic/Basic';
 
 const Contributors = props => {
   const [state, setState] = useState({
@@ -9,13 +11,15 @@ const Contributors = props => {
     userJoined: true,
   })
 
+  const { outgoing } = useContext(EventsContext).requests
+  const requestSent = outgoing.some(req => req.project_id === Number(props.project_id))
+
   useEffect(()=> {
     ProjectsService.getContributorsList(props.project_id)
       .then(res=> setState({
         ...res,
       }))
   }, [])
-
   return (
     <div>
       <h3>Contributors</h3>
@@ -28,12 +32,13 @@ const Contributors = props => {
             title={c.title}/>
         ))}
       </div>
-        { state.userJoined ? '' : (
+        { state.userJoined || requestSent ? '' : (
           <JoinBtn
             {...props}
             leader_id={props.leader_id}
             project_id={props.project_id}/>
         )}
+        {!requestSent ? '' : <Msg text={`Awaiting approval`}/>}
     </div>
   )
 }
