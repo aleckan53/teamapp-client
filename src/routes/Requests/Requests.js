@@ -26,8 +26,7 @@ const Requests = props => {
           )}
         </div>
       )}
-      { !incoming.length && !outgoing.length ? <Msg text="New requests appear here"/> : ''
-      }
+      { !incoming.length && !outgoing.length ? <Msg text="New requests appear here"/> : '' }
     </section>
   )
 }

@@ -17,6 +17,7 @@ const Account = props => {
     first_name: '',
     last_name: '',
     about: '',
+    links: [],
   })
 
   useEffect(() => {
@@ -28,7 +29,7 @@ const Account = props => {
     TokenService.clearAuthToken()
     setAuthorized(false)
     props.history.push('/account')
-    window.location.reload() // closes sse src !bad
+    window.location.reload() // closes EventsSource !bad
   }
 
   return (
@@ -44,11 +45,13 @@ const Account = props => {
       <section>
         <TitledText
           title="About"
-          content={state.about}/> 
-        <Social/>
+          content={state.about}/>
+        <Social
+          links={state.links}/>
       </section>
     </div>
   )
 }
 
 export default Account
+

@@ -3,6 +3,7 @@ import styles from './Hero.module.css'
 import { Link } from 'react-router-dom'
 import { IoMdSettings as Icon } from 'react-icons/io' 
 import { HeaderBtn } from '../Basic/Basic'
+import PropTypes from 'prop-types'
 
 const Hero = props => {
 
@@ -28,6 +29,11 @@ const Hero = props => {
       {props.children}
     </header>
   )
+}
+
+Hero.propTypes = {
+  heading: PropTypes.string,
+  id: PropTypes.number,
 }
 
 export default Hero

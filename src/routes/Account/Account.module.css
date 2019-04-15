@@ -1,5 +1,5 @@
 .editBtn {
-  color: var(--main-text-30);
+  color: var(--border-color);
   position: absolute;
   right: 0;
   padding: var(--padding-side);

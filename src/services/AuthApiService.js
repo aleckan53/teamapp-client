@@ -11,13 +11,11 @@ const AuthApiService = {
       .then(res => !res.ok ? res.json().then(e=> Promise.reject(e)) : res.json())
       .catch(err=> console.log(err))
   },
-  postUser(user) {
+  postUser(data) {
     return fetch(`${config.API_ENDPOINT}/users/create`, {
-      method: 'POST',
-      body: JSON.stringify(user),
-      headers: {
-        'content-type': 'application/json'
-      }})
+        method: 'POST',
+        body: data,
+      })
       .then(res => !res.ok
         ? res.json().then(e=> Promise.reject(e))
         : res.json().then(res=> ({

@@ -4,6 +4,7 @@ import { Btn, ReqStatus } from '../Basic/Basic'
 import RequestsService from '../../services/RequestsService'
 import { IoMdArrowDown as Down, IoMdArrowUp as Up } from 'react-icons/io'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 const RequestCard = {
   Incoming(props) {
@@ -31,7 +32,6 @@ const RequestCard = {
         </div>
       </div>
     )
-
   },
   Outgoing(props) {
     return (
@@ -70,6 +70,14 @@ function generateDate(date) {
       day: 'numeric'}
     )
 }
+
+Object.keys(RequestCard).forEach(type => {
+  RequestCard[type].propTypes = {
+    project_id: PropTypes.number.isRequired,
+    id: PropTypes.number.isRequired,
+    status: PropTypes.oneOf(['Pending', 'Accepted', 'Declined']),      
+  }
+})
 
 
 export default RequestCard

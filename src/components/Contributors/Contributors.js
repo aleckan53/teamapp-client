@@ -3,7 +3,7 @@ import styles from './Contributors.module.css'
 import ProjectsService from '../../services/ProjectService'
 import JoinBtn from '../JoinBtn/JoinBtn'
 import EventsContext from '../../context/EventsContext'
-import { Msg } from '../Basic/Basic';
+import { Msg } from '../Basic/Basic'
 
 const Contributors = props => {
   const [state, setState] = useState({
@@ -20,6 +20,7 @@ const Contributors = props => {
         ...res,
       }))
   }, [])
+
   return (
     <div>
       <h3>Contributors</h3>
@@ -32,13 +33,14 @@ const Contributors = props => {
             title={c.title}/>
         ))}
       </div>
-        { state.userJoined || requestSent ? '' : (
-          <JoinBtn
+        { state.userJoined || requestSent 
+            ? '' 
+            : <JoinBtn
             {...props}
             leader_id={props.leader_id}
             project_id={props.project_id}/>
-        )}
-        {!requestSent ? '' : <Msg text={`Awaiting approval`}/>}
+        }
+        {!requestSent || state.userJoined? '' : <Msg text={`Awaiting approval`}/>}
     </div>
   )
 }
@@ -61,5 +63,4 @@ export const Contributor = props => {
     </div>
   )
 }
-
 export default Contributors

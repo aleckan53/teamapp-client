@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import styles from './ProjectCard.module.css'
 import ProjectsContext from '../../context/ProjectsContext'
 import { CustomLoader } from '../Basic/Basic'
+import PropTypes from 'prop-types'
 
 const ProjectCard = props => {
   const context = useContext(ProjectsContext)
@@ -25,5 +26,14 @@ const ProjectCard = props => {
     </Link>
   )
 }
+
+ProjectCard.propTypes = {
+  project: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    img: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+  })
+}
+
 
 export default ProjectCard

@@ -4,9 +4,11 @@
   "private": true,
   "dependencies": {
     "eventsource": "^1.0.7",
+    "prop-types": "^15.7.2",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
     "react-icons": "^3.5.0",
+    "react-images-upload": "^1.2.6",
     "react-infinite-scroll-component": "^4.5.1",
     "react-loader-spinner": "^2.3.0",
     "react-router-dom": "^5.0.0",

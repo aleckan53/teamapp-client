@@ -28,7 +28,7 @@ const ProjectDetails = props => {
   return (
     <div className="ProjectDetails">
       <Hero 
-        id={props.match.params.id}
+        id={state.id}
         show={state.userCanEdit}
         img={state.img}
         heading={state.title}/>
@@ -36,11 +36,12 @@ const ProjectDetails = props => {
         <TitledText
           title="Description"
           content={state.description}/>
-        <Social/>
+        <Social
+          links={state.links}/>
         <Contributors
           {...props}
           leader_id={state.leader_id}
-          project_id={props.match.params.id}/>
+          project_id={Number(props.match.params.id)}/>
       </section>
     </div>
   )

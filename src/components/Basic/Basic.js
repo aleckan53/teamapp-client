@@ -2,6 +2,7 @@ import React from 'react'
 import styles from './Basic.module.css'
 import Loader from 'react-loader-spinner'
 import { IoMdMoon as Moon, IoMdSunny as Sun } from 'react-icons/io'
+import PropTypes from 'prop-types'
 
 export const Header = props => {
   return (
@@ -12,6 +13,10 @@ export const Header = props => {
   )
 }
 
+Header.propTypes = {
+  h1: PropTypes.string
+}
+
 export const HeaderBtn = props => {
   const Icon = props.icon
   return (
@@ -19,6 +24,11 @@ export const HeaderBtn = props => {
       {props.children}
     </Icon>
   )
+}
+
+HeaderBtn.propTypes = {
+  icon: PropTypes.func,
+  onClick: PropTypes.func,
 }
 
 export const CustomLoader = props => {
@@ -39,6 +49,7 @@ export const Input = props => {
   return (
     <div className={styles.inputContainer}>
       <input
+        required={!!props.required}
         placeholder={props.placeholder}
         type={props.type}
         value={props.value}
@@ -51,6 +62,12 @@ export const Input = props => {
   )
 }
 
+Input.propTypes = {
+  required: PropTypes.bool,
+  showLoader: PropTypes.bool,
+  onChange: PropTypes.func,
+}
+
 export const Btn = (props) => {
   return (
     <button
@@ -58,9 +75,16 @@ export const Btn = (props) => {
       disabled={props.disabled}
       onClick={props.onClick}
       className={`${styles.btn} ${props.className} ${props.disabled ? styles.diabled : ''}`}>
-      {props.disabled ? 'Please fill out required fields *' : props.title}
+      {props.title}
     </button>
   )
+}
+
+Btn.propTypes = {
+  name: PropTypes.string,
+  disabled: PropTypes.bool,
+  onClick: PropTypes.func,
+  title: PropTypes.string,
 }
 
 export const Label = props => {
@@ -112,12 +136,12 @@ export const Form = props => {
 
 export const Msg = props => {
   return (
-    <p className={styles.msg}>{props.text}</p>
+    <p className={styles.msg} style={props.style}>{props.text}</p>
   )
 }
 
 export const TitledText = props => {
-  return (
+  return !props.content ? '' : (
     <>
       <h3>{props.title}</h3>
       <p>{props.content}</p>
@@ -143,6 +167,11 @@ export const CheckBox = props => {
   )
 }
 
+CheckBox.propTypes = {
+  checked: PropTypes.bool,
+  onChange: PropTypes.func,
+}
+
 // TODO (upgrade) #2: Dot
 export const Dot = props => {
   return <span className={`${styles.dot}`}></span>
@@ -162,4 +191,8 @@ export const ReqStatus = props => {
       {props.status}
     </span>
   )
+}
+
+ReqStatus.propTypes = {
+  status: PropTypes.oneOf(['Pending', 'Accepted', 'Declined'])
 }

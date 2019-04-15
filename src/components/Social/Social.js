@@ -7,32 +7,17 @@ import {
   IoLogoLinkedin as linkedin,
   IoLogoYoutube as youtube,
   IoLogoTwitter as twitter,
-  IoMail as email,
+  IoMdMail as email,
 } from 'react-icons/io'
 
 const Social = props => {
+  
+  const icons = {facebook, github, instagram, linkedin, youtube, twitter, email}
 
-  const test = [
-    {
-      name: 'github',
-      url: 'http://facebook.com',
-    },
-    {
-      name: 'youtube',
-      url: 'http://facebook.com',
-    },
-    {
-      name: 'twitter',
-      url: 'http://facebook.com',
-    },
-  ]
-
-  const icons = {facebook, github, instagram, linkedin, youtube, twitter}
-
-  return (
+  return !props.links ? '' : (
     <div className={styles.social}>
       <ul>
-        {test.map((link, i) => {
+        {props.links.map((link, i) => {
           const Icon = icons[link.name]
           return (
             <li key={i}>
