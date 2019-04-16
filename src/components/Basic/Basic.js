@@ -20,9 +20,14 @@ Header.propTypes = {
 export const HeaderBtn = props => {
   const Icon = props.icon
   return (
-    <Icon onClick={props.onClick} className={`${styles.headerBtn} ${props.className}`}>
-      {props.children}
-    </Icon>
+    <button 
+      style={props.style}
+      onClick={props.onClick}     
+      className={styles.headerBtnWrapper}>
+      <Icon id='header-btn' className={`${styles.headerBtnIcon} ${props.className}`}>
+        {props.children}
+      </Icon>
+    </button>
   )
 }
 
@@ -87,14 +92,6 @@ Btn.propTypes = {
   title: PropTypes.string,
 }
 
-export const Label = props => {
-  return (
-    <label
-      className={styles.label} 
-      htmlFor={props.id}>{props.label}</label>
-  )
-}
-
 export const TextArea = props => {
   return (
     <textarea
@@ -106,7 +103,9 @@ export const TextArea = props => {
 export const LabeledInput = props => {
   return (
     <div className={styles.labeledInput}>
-      <Label {...props}/>
+    <label
+      className={styles.label} 
+      htmlFor={props.id}>{props.label}</label>
       <Input {...props}/>
     </div>
   )
@@ -115,7 +114,9 @@ export const LabeledInput = props => {
 export const LabeledTextArea = props => {
   return (
     <div className={styles.labeledTextArea}>
-      <Label {...props}/>
+      <label
+        className={styles.label} 
+        htmlFor={props.id}>{props.label}</label>
       <TextArea {...props}/>
     </div>
   )
@@ -149,16 +150,16 @@ export const TitledText = props => {
   )
 }
 
-export const CheckBox = props => {
+export const ThemeSwitch = props => {
   return (
-    <div className={styles.checkbox}>
+    <div className={styles.themeSwitch}>
       <input 
-        style={{
-          background: `image(${Moon})`
-        }}
         checked={props.checked}
         onChange={props.onChange}
-        type='checkbox'/>
+        type='checkbox'
+        style={{
+          background: `image(${Moon})`
+        }}/>
       <Moon 
         className={`${styles.icon} ${!props.checked ? '' : styles.checked}`}/>
       <Sun
@@ -167,7 +168,7 @@ export const CheckBox = props => {
   )
 }
 
-CheckBox.propTypes = {
+ThemeSwitch.propTypes = {
   checked: PropTypes.bool,
   onChange: PropTypes.func,
 }

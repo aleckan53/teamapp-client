@@ -29,18 +29,19 @@ const Account = props => {
     TokenService.clearAuthToken()
     setAuthorized(false)
     props.history.push('/account')
-    window.location.reload() // closes EventsSource !bad
+    window.location.reload() // TODO #4: closes EventsSource !bad
   }
 
   return (
     <div className="Account">
       <Hero
+        position='center 10%'
         img={state.avatar}
         heading={`${state.first_name} ${state.last_name}`}>
         <HeaderBtn 
           onClick={() => handleLogOut()}
           icon={Icon}
-          className={styles.editBtn}/>
+          className={styles.logout}/>
       </Hero>
       <section>
         <TitledText

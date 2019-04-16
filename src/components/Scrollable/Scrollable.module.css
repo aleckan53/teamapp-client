@@ -1,8 +1,8 @@
 .scrollable {
   margin-top: 2rem;
-  height: 73vh;
-  overflow: scroll;
+  height: 68vh;
   position: relative;
+  overflow: scroll;
 }
 
 .scrollable::-webkit-scrollbar{
@@ -13,3 +13,8 @@
   text-align: center;
   padding: 10px 0 0;
 }
+
+.scrollable > div:nth-child(1) {
+  height: auto;
+}
+

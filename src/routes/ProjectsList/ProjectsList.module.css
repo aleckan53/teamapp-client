@@ -1,0 +1,7 @@
+@media (min-width: 1100px) {
+  .projectsList {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1rem;
+  }
+}

@@ -12,6 +12,7 @@ const ProjectCard = props => {
     backgroundPosition: `center`,
     backgroundSize: `cover`
   }
+  
   return (
     <Link 
       onClick={()=> context.setCurrentProject(props.project)}

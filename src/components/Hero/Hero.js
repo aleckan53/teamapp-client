@@ -9,7 +9,7 @@ const Hero = props => {
 
   const backgroundImgStyle = {
     backgroundImage: `linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0) 65%, rgba(0,0,0,0.25) 100%), url(${props.img})`,
-    backgroundPosition: `center`,
+    backgroundPosition: props.position,
     backgroundSize: `cover`
   }
 
@@ -23,9 +23,7 @@ const Hero = props => {
           <HeaderBtn 
             icon={Icon}
             className={styles.editBtn}/>
-        </Link>
-      }
-
+        </Link>}
       {props.children}
     </header>
   )

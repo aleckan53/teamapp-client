@@ -1,11 +1,7 @@
-.editBtn {
+.logout {
   color: var(--border-color);
-  position: absolute;
-  right: 0;
-  padding: var(--padding-side);
-  padding-top: 5%;
 }
 
-.editBtn:hover {
+.logout:hover {
   color: var(--main-color);
 }

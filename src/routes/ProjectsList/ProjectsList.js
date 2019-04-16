@@ -4,6 +4,7 @@ import { IoMdAddCircle as icon } from 'react-icons/io'
 import ProjectCard from '../../components/ProjectCard/ProjectCard'
 import { Header, HeaderBtn, Msg } from '../../components/Basic/Basic'
 import ProjectsService from '../../services/ProjectService'
+import styles from './ProjectsList.module.css'
  
 const ProjectsList = props => {
   const [state, setState] = useState([])
@@ -17,18 +18,20 @@ const ProjectsList = props => {
   }, [])
   
   return (
-    <section className="ProjectsList">
+    <section>
       <Header h1='Projects'>
         <Link to="/projects/add">
-          <HeaderBtn icon={icon}/>
+          <HeaderBtn icon={icon} style={{position: 'static'}}/>
         </Link>        
       </Header>
-      {!state.length
-        ? <Msg text="Your projects appear here"/>
-        : state.map((project, i) =>
-            <ProjectCard 
-              key={i} 
-              project={project}/>)}
+      <div className={styles.projectsList}>
+        {!state.length
+          ? <Msg text="Your projects appear here"/>
+          : state.map((project, i) =>
+          <ProjectCard 
+          key={i} 
+          project={project}/>)}
+      </div>
     </section>
   )
 }

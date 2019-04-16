@@ -13,7 +13,7 @@ const Scrollable = props => {
         loader={<CustomLoader/>}
         scrollableTarget="Scrollable"
         dataLength={props.dataLength}
-        endMessage={props.totalItems > 5 ? <Msg text="That's it for now"/>: ''}>
+        endMessage={props.totalItems > 5 ? <Msg text="You've seen them all"/>: ''}>
         {props.items.map((p,i)=><ProjectCard to={`/projects/${p.id}`} key={i} project={p}/>)}
       </InfiniteScroll>
     </div>

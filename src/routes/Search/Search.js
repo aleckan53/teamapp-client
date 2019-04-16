@@ -44,7 +44,7 @@ const Search = props => {
   }
   
   const nextPage = () => {
-    return state.currentPage === Math.ceil(state.totalProjects/5) // 5 = api response limit
+    return state.currentPage === Math.ceil(state.totalProjects/8) // 5 = api response limit
       ? state.currentPage
       : setState({
         ...state,

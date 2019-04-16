@@ -25,18 +25,46 @@
   border-radius: 10px;
 }
 
+@media (min-width: 700px) {
+  .contributorsList {
+    grid-column-gap: 3rem;
+  }
+  .image {
+    height: 6rem;;
+  }
+}
+
+@media (min-width: 850px) {
+  .contributorsList {
+    grid-column-gap: 4rem;
+  }
+  .image {
+    height: 7rem;;
+  }
+}
+
+@media (min-width: 1100px) {
+  .contributorsList {
+    grid-column-gap: 3rem;
+  }
+  .image {
+    height: 6.5rem;;
+  }
+}
+
 .name {
   font-size: 0.9rem;
   font-weight: 500;
   text-align: center;
   display: block;
   margin: 5px 0 3px;
-  color: var(--main-text-80)
+  color: var(--main-text-80);
 }
 
 .title {
   text-align: center;
   display: block;
   font-size: 0.7rem;
-  color: var(--main-text-60)
+  color: var(--main-text-60);
 }
+

@@ -29,17 +29,7 @@ const LoginPage = props => {
 
   const onLoginSuccess = () => {
     setAuthorized(true)
-    tokenExpiry()
     redir(props)
-  }
-
-  const tokenExpiry = () => {
-    let idleTimeout
-    clearTimeout(idleTimeout)
-    setTimeout(() => {
-      TokenService.clearAuthToken()
-      setAuthorized(false)
-    }, 3.6e+6)
   }
 
   const redir = props => {

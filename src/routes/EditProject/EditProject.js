@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react'
-import { Header, Form, LabeledInput, LabeledTextArea, Btn, Msg } from '../../components/Basic/Basic'
 import ProjectsContext from '../../context/ProjectsContext'
 import ProjectsService from '../../services/ProjectService'
+import { Header, Form, LabeledInput, LabeledTextArea, Btn, Msg } from '../../components/Basic/Basic'
 
 const EditProject = props => {
   const context = useContext(ProjectsContext)

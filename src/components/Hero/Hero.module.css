@@ -6,12 +6,13 @@
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  padding: var(--padding-side)
+  box-shadow: 0px 5px 10px -3px var(--box-shadow);
 }
 
-.hero .h1 {
+.h1 {
   position: absolute;
   z-index: 3;
+  left: 5%;
   bottom: 3%;
   color: var(--sub-text);
   font-size: 1.5rem;
@@ -19,13 +20,37 @@
 
 .editBtn {
   color: var(--main-text-30)!important;
-  position: absolute;
-  right: 0;
-  padding: var(--padding-side);
-  padding-top: 5%;
 }
 
 .editBtn:hover {
   color: var(--main-color)!important;
+}
+
+@media (min-width: 500px) {
+  .h1 {
+    left: 10%;
+  }
+}
+
+@media (min-width:1100px) {
+  .hero {
+    margin: var(--padding-side);
+    margin-top: -1%;
+    width: 50%;
+    height: 300px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    margin-bottom: 3rem;
+  }
+  .h1 {
+    left: 3%;
+    bottom: 1%;
+  }
+}
+
+@media (min-width: 1500px) {
+  .hero {
+    width: 36%
+  }
 }
 

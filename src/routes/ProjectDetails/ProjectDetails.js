@@ -28,6 +28,7 @@ const ProjectDetails = props => {
   return (
     <div className="ProjectDetails">
       <Hero 
+        position='center'
         id={state.id}
         show={state.userCanEdit}
         img={state.img}

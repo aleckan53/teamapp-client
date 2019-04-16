@@ -13,7 +13,7 @@ import AddProject from '../../routes/AddProject/AddProject'
 import EditProject from '../../routes/EditProject/EditProject'
 import Requests from '../../routes/Requests/Requests'
 import ThemeContext from '../../context/ThemeContext'
-import { CheckBox } from '../Basic/Basic'
+import { ThemeSwitch } from '../Basic/Basic'
 import EventsContext from '../../context/EventsContext'
 import { Error } from '../Basic/Basic'
 
@@ -39,7 +39,7 @@ const App = () => {
           <Route component={NotFound}/>
         </Switch>
       </main>
-      <CheckBox 
+      <ThemeSwitch 
         checked={theme.dark}
         onChange={() => theme.toggle()}/>
     </div>

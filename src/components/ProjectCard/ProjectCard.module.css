@@ -8,6 +8,18 @@
   margin-bottom: 7%;
 }
 
+@media (min-width: 1100px) {
+  .projectCard {
+    height: 12vw;
+  }
+} 
+
+@media (min-width: 1500px) {
+  .projectCard {
+    height: 10.4vw;
+  }
+} 
+
 .projectCard > h2 {
   padding: 0.7rem;
   color: var(--sub-text);
