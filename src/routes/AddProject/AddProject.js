@@ -28,6 +28,7 @@ const AddProject = props => {
           id='title'
           label='Title'/>
         <LabeledInput
+          devMsg='*** Image upload feature will be avialable soon, for now please copy/paste an external img link.'
           type='text'
           onChange={e => setState({...state, img: e.target.value})}
           id='img'

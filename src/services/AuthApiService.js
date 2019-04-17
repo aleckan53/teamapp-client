@@ -1,4 +1,5 @@
 import config from '../config'
+import TokenService from './TokenService'
 
 const AuthApiService = {
   postLogin(credentials) {
@@ -24,7 +25,17 @@ const AuthApiService = {
         })))
       .catch(err=> console.log(err))
   },
-
+  guestLogin(setAuthorized, history) {
+    AuthApiService.postLogin({
+      email: config.GUEST_EMAIL,
+      password: config.GUEST_PASS,
+    })
+      .then(res => {
+        TokenService.saveAuthToken(res.authToken)
+        setAuthorized(true)
+        history.push('/account')
+      })
+  }
 }
 
 export default AuthApiService

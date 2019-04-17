@@ -12,7 +12,7 @@ const NavBar = props => {
   const count = outgoing.length + incoming.length
 
   return !(TokenService.getAuthToken()) ? '' : (
-    <nav className={styles.navBar}>
+    <nav id='navBar' className={styles.navBar}>
       <NavLink to='/search'>Search</NavLink>
       <NavLink to='/projects'>Projects</NavLink>
       <NavLink to='/requests'>Requests{!count ? '' : <Dot/>}</NavLink>

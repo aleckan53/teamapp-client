@@ -16,6 +16,7 @@ import ThemeContext from '../../context/ThemeContext'
 import { ThemeSwitch } from '../Basic/Basic'
 import EventsContext from '../../context/EventsContext'
 import { Error } from '../Basic/Basic'
+import LandingPage from '../../routes/LandingPage/LandingPage'
 
 const App = () => {
   const theme = useContext(ThemeContext)
@@ -36,6 +37,7 @@ const App = () => {
           <PrivateRoute path='/search' component={Search}/>
           <Route path="/signup" component={SignUpPage}/>
           <Route path="/login" component={LoginPage}/>
+          <Route exact path='/' component={LandingPage}/>
           <Route component={NotFound}/>
         </Switch>
       </main>

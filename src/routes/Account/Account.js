@@ -3,7 +3,6 @@ import Hero from '../../components/Hero/Hero'
 import { HeaderBtn, TitledText } from '../../components/Basic/Basic'
 import TokenService from '../../services/TokenService'
 import { IoMdExit as Icon } from 'react-icons/io' 
-import styles from './Account.module.css'
 import Social from '../../components/Social/Social'
 import UsersService from '../../services/UsersService'
 import EventsContext from '../../context/EventsContext'
@@ -39,9 +38,9 @@ const Account = props => {
         img={state.avatar}
         heading={`${state.first_name} ${state.last_name}`}>
         <HeaderBtn 
+          style={{opacity: '.8'}}
           onClick={() => handleLogOut()}
-          icon={Icon}
-          className={styles.logout}/>
+          icon={Icon}/>
       </Hero>
       <section>
         <TitledText

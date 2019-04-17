@@ -3,6 +3,7 @@ import styles from './Basic.module.css'
 import Loader from 'react-loader-spinner'
 import { IoMdMoon as Moon, IoMdSunny as Sun } from 'react-icons/io'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 
 export const Header = props => {
   return (
@@ -92,6 +93,12 @@ Btn.propTypes = {
   title: PropTypes.string,
 }
 
+export const BtnLink = props => {
+  return (
+    <Link style={props.style}to={props.to} className={`${styles.btn} ${props.className}`}>{props.title}</Link>
+  )
+}
+
 export const TextArea = props => {
   return (
     <textarea
@@ -106,6 +113,7 @@ export const LabeledInput = props => {
     <label
       className={styles.label} 
       htmlFor={props.id}>{props.label}</label>
+      {!props.devMsg ? '' : <p className='devMsg'>{props.devMsg}</p>}
       <Input {...props}/>
     </div>
   )

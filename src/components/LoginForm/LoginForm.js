@@ -66,6 +66,7 @@ export const SignUpForm = props => {
         id="last_name"
         type="text"
         onChange={e => props.onChange({...props.state, last_name: e.target.value})}/>
+      <p className='devMsg'>*** Image upload feature will be avialable soon, for now please copy/paste an external img link or default image will be set.</p>
       <Input
         placeholder="Profile image"
         value={props.state.avatar || ''}

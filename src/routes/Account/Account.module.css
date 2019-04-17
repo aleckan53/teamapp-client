@@ -1,7 +1,0 @@
-.logout {
-  color: var(--border-color);
-}
-
-.logout:hover {
-  color: var(--main-color);
-}
