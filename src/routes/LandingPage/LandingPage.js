@@ -45,7 +45,7 @@ const LandingPage = props => {
         <section>
           <h3>About</h3>
           <p>
-            AppName is a new collaboration platform, helping to connect people.<br/><br/>
+            AppName is a new collaboration platform, helping people to find .<br/><br/>
             If you:
           </p>
             <ul>

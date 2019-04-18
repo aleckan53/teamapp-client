@@ -1,9 +1,11 @@
 import React, { useContext } from 'react'
-import { LoginForm } from '../../components/LoginForm/LoginForm'
 import TokenService from '../../services/TokenService'
 import AuthApiService from '../../services/AuthApiService'
 import { Header } from '../../components/Basic/Basic'
 import EventsContext from '../../context/EventsContext'
+import { Link } from 'react-router-dom'
+import { Msg, Form, Btn, Input } from '../../components/Basic/Basic'
+import styles from './LoginPage.module.css'
 
 const LoginPage = props => {
 
@@ -41,8 +43,29 @@ const LoginPage = props => {
   return (
     <section>
       <Header h1="Log in"/>
-      <LoginForm
-        handleSubmit={handleSubmitJwtAuth}/>
+      <Form
+        id="loginFrom"
+        className={styles.form}
+        onSubmit={e => handleSubmitJwtAuth(e)}>
+        <Input
+          required
+          id="email"
+          type="text"
+          placeholder="Email"/>
+        <Input
+          required
+          id="password"
+          type="password"
+          placeholder="Password"/>
+        <Btn
+          className={styles.btn}
+          title="Submit"
+          type="submit"/>
+        <Link to='/signup'>
+          <Msg
+            text='Sign up'/>
+        </Link>
+    </Form>
     </section>
   )
 }

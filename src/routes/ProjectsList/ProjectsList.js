@@ -10,13 +10,14 @@ const ProjectsList = props => {
   const [state, setState] = useState([])
 
   useEffect(() => {
+
     ProjectsService.getUserProjectsList()
       .then(res => setState(res))
     return () => {
       setState([])
     }
   }, [])
-  
+
   return (
     <section>
       <Header h1='Projects'>

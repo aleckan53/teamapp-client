@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { SignUpForm } from '../../components/LoginForm/LoginForm'
 import AuthApiService from '../../services/AuthApiService'
-import { Header } from '../../components/Basic/Basic'
+import { Header, Msg, Form, Btn, TextArea, Input } from '../../components/Basic/Basic'
+import { Link } from 'react-router-dom'
+import styles from './SignUpPage.module.css'
 
 const SignUpPage = props => {
 
@@ -53,14 +54,57 @@ const SignUpPage = props => {
     <section>
       <Header h1='Create profile'>
       </Header>
-      <SignUpForm
-        validate={validate}
-        formValid={formValid}
-        handleSubmit={e => handleSubmit(e)}
-        state={state}
-        valid={valid}
-        btnTitle={validMsg(valid)}
-        onChange={setState}/>
+      <Form
+        className={styles.form}
+        id="signUpForm"
+        onSubmit={e => handleSubmit(e)}>
+        <Input
+          required
+          placeholder="Email *"
+          value={state.email}
+          id="email"
+          type="text"
+          onChange={e => setState({...state, email: e.target.value})}/>
+        <Input
+          required
+          placeholder="Password *"
+          value={state.password}
+          id="password"
+          type="password"
+          onChange={e => setState({...state, password: e.target.value})}/>
+        <Input
+          required
+          placeholder="First Name *"
+          value={state.first_name}
+          id="first_name"
+          type="text"
+          onChange={e => setState({...state, first_name: e.target.value})}/>
+        <Input
+          required
+          placeholder="Last Name *"
+          value={state.last_name}
+          id="last_name"
+          type="text"
+          onChange={e => setState({...state, last_name: e.target.value})}/>
+        <p className='devMsg'>*** Image upload feature will be avialable soon, for now please copy/paste an external img link or default image will be set.</p>
+        <Input
+          placeholder="Profile image"
+          value={state.avatar || ''}
+          id="avatar"
+          type="text"
+          onChange={e => setState({...state, avatar: e.target.value})}/>
+        <TextArea
+          value={state.about}
+          onChange={e => setState({...state, about: e.target.value})}
+          placeholder="Write a few words about yourself"/>
+        <Btn
+          disabled={!formValid}
+          title={validMsg(valid) || 'Submit'}
+          type="submit"/>
+        <Link to='/login'>
+          <Msg text='Log in'/>
+        </Link>
+      </Form>
     </section>
   )
 }
