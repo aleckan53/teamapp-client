@@ -22,7 +22,7 @@ const LandingPage = props => {
       <header className={styleMedia.header}>
         <div className={styles.hero}>
         </div>
-        <span className={styles.version}>v 0.1</span>
+        <span className={styles.version}>v 0.1 <strong>Beta</strong></span>
         <div className={styles.btnContainer}>
           <BtnLink 
             style={{color: 'var(--sub-text)'}}
@@ -45,7 +45,8 @@ const LandingPage = props => {
         <section>
           <h3>About</h3>
           <p>
-            AppName is a new collaboration platform, helping people to find .<br/><br/>
+            Have you ever had an awesome idea to create something, that would other people will connect to, but it didn't go further?
+            AppName is a new collaboration platform, helping people to solve this problem.<br/><br/>
             If you:
           </p>
             <ul>
@@ -77,7 +78,7 @@ const LandingPage = props => {
               title='Continue as a guest'/>
           <img src={gif} alt=''/>
           <p className='devMsg'>
-            *** Please note AppName is still in development. <br/>
+            Please note AppName is still in development. <br/>
             More features coming soon! <br/>
             If you'd like to contribute to the project, please visit our
             <a href='https://github.com'> github page</a>

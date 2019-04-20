@@ -7,7 +7,8 @@ const AuthApiService = {
       method: 'POST',
       body: JSON.stringify(credentials),
       headers: {
-        'content-type': 'application/json'
+        'content-type': 'application/json',
+        
       }})
       .then(res => !res.ok ? res.json().then(e=> Promise.reject(e)) : res.json())
       .catch(err=> console.log(err))
