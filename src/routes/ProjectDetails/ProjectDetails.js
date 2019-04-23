@@ -3,29 +3,30 @@ import ProjectsService from '../../services/ProjectService'
 import ProjectsContext from '../../context/ProjectsContext'
 import Hero from '../../components/Hero/Hero'
 import Contributors from '../../components/Contributors/Contributors'
-import { TitledText } from '../../components/Basic/Basic'
+import { TitledText, Error } from '../../components/Basic/Basic'
 import Social from '../../components/Social/Social'
 
 const ProjectDetails = props => {
   const { setCurrentProject, currentProject } = useContext(ProjectsContext)
 
   const [state, setState] = useState({})
+  const [error, setError] = useState(null)
 
   useEffect(()=> { 
     if(!Object.entries(currentProject).length) {
       ProjectsService.getProjectById(props.match.params.id)
-        .then(res => {
-          setState(res)
-        })
+        .then(setState)
+        .catch(setError)
     } else {
       setState(currentProject)
     }
     return () => {
       setCurrentProject({})
+      setError(null)
     }
   }, [])
   
-  return (
+  return error ? <Error msg={error}/> : (
     <div className="ProjectDetails">
       <Hero 
         position='center'

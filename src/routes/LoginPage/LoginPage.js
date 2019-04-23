@@ -1,14 +1,16 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import TokenService from '../../services/TokenService'
 import AuthApiService from '../../services/AuthApiService'
-import { Header } from '../../components/Basic/Basic'
+import { Header, LoaderFull } from '../../components/Basic/Basic'
 import EventsContext from '../../context/EventsContext'
 import { Link } from 'react-router-dom'
-import { Msg, Form, Btn, Input } from '../../components/Basic/Basic'
+import { Msg, Form, Btn, Input, Error } from '../../components/Basic/Basic'
 import styles from './LoginPage.module.css'
 
 const LoginPage = props => {
 
+  const [error, setError] = useState(null)
+  const [loading, setLoading] = useState(false)
   const { setAuthorized } = useContext(EventsContext)
 
   const handleSubmitJwtAuth = e => {
@@ -18,7 +20,7 @@ const LoginPage = props => {
     AuthApiService.postLogin({
       email: email.value,
       password: password.value,
-    })
+    }, setLoading)
       .then(res => {
         email.value = ''
         password.value = ''
@@ -26,7 +28,7 @@ const LoginPage = props => {
 
         onLoginSuccess()
       })
-    .catch(err => console.log(err))
+    .catch(setError)
   }
 
   const onLoginSuccess = () => {
@@ -41,6 +43,8 @@ const LoginPage = props => {
   }
 
   return (
+    <>
+    {loading ? <LoaderFull/> : ''}
     <section>
       <Header h1="Log in"/>
       <Form
@@ -48,11 +52,13 @@ const LoginPage = props => {
         className={styles.form}
         onSubmit={e => handleSubmitJwtAuth(e)}>
         <Input
+          autoComplete='email'
           required
           id="email"
           type="text"
           placeholder="Email"/>
         <Input
+          autoComplete='current-password'
           required
           id="password"
           type="password"
@@ -65,8 +71,10 @@ const LoginPage = props => {
           <Msg
             text='Sign up'/>
         </Link>
+        <Error error={error}/>
     </Form>
     </section>
+    </>
   )
 }
 

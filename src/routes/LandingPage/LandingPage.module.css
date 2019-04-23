@@ -4,7 +4,7 @@
   top: 4%;
   left: 5%;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: .8rem;
+  font-size: .85rem;
 }
 
 .landingPage > header {
@@ -106,6 +106,19 @@
   }
 }
 
+@media (min-width: 1500px) {
+  .btnContainer {
+    right: 32%;
+    width: 20%;
+  }
+  .titleContainer {
+    left: 32%;
+  }
+  .version {
+    left: 32%;
+  }
+}
+
 .titleContainer h1 {
   color: var(--sub-text);
   margin-bottom: .4rem;
@@ -137,8 +150,30 @@
 }
 
 .landingPage ul, ol{
-  padding-left: 20px;
+  padding-left: 25px;
   color: var(--main-text);
+  list-style: none;
+  font-weight: 600
+}
+
+.landingPage ul li::before {
+  content: "\2022";
+  color: var(--main-color);
+  font-weight: bold;
+  display: inline-block;
+  width: 1em;
+  margin-left: -25px;
+}
+
+.landingPage ol li {
+  counter-increment: default;
+}
+.landingPage ol li::before {
+  content: counter(default) ". ";
+  color: var(--main-color);
+  font-weight: bold;
+  margin-left: -25px;
+  margin-right: 10px;
 }
 
 .landingPage a {
@@ -156,5 +191,13 @@ footer {
   text-align: center;
   padding: 40px 0 0;
   font-size: .7rem
+}
+
+.landingPage button {
+  margin-bottom: 3rem;
+}
+
+.landingPage button:hover {
+  box-shadow:0px 0px 10px var(--main-color);
 }
 

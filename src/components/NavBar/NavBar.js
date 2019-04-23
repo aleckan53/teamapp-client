@@ -5,7 +5,6 @@ import { Dot } from '../Basic/Basic'
 import EventsContext from '../../context/EventsContext'
 import TokenService from '../../services/TokenService'
 
-
 const NavBar = props => {
   
   const { outgoing, incoming } = useContext(EventsContext).requests

@@ -15,7 +15,7 @@ const RequestCard = {
         </div>
         <div className={styles.body}>
           <Link to={`/projects/${props.project_id}`}>
-            <p>{props.title}</p>
+            <p>{props.title.slice(0,30)}</p>
           </Link>
           <p>{`From: ${props.first_name} ${props.last_name}`}</p>
           <p>{generateDate(props.created_at)}</p>
@@ -41,7 +41,7 @@ const RequestCard = {
         </div>
         <div className={styles.body}>
         <Link to={`/projects/${props.project_id}`}>
-          <p>{props.title}</p>
+          <p>{props.title.slice(0,30)}</p>
         </Link>
           <p>{`To: ${props.first_name} ${props.last_name}`}</p>
           <p>{generateDate(props.created_at)}</p>

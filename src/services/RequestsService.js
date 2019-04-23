@@ -38,7 +38,7 @@ const RequestsService = {
   },
   getRequestsSse(authorized, cb, close) {
     if(authorized) {
-      const src = new EventSource(`${config.API_ENDPOINT}/sse`, {
+      let src = new EventSource(`${config.API_ENDPOINT}/sse`, {
       headers: {
         'authorization': `bearer ${TokenService.getAuthToken()}`,
       }})
@@ -55,13 +55,9 @@ const RequestsService = {
 
       src.onerror = () => {
         src.close()
+        this.getRequestsSse(authorized, cb, close)
       }
 
-      // doesn't work
-      if(close) {
-        src.close()
-      }
-              
     return src
     }
   }

@@ -24,7 +24,6 @@ const ProjectsService = {
         'authorization': `bearer ${TokenService.getAuthToken()}`
       }})
       .then(res => !res.ok ? res.json().then(e => Promise.reject(e)) : res.json())
-      .catch(err => console.error(err))
   },
   uploadProject(routerProps, project){
     return fetch(`${config.API_ENDPOINT}/projects/add`, {
@@ -34,7 +33,7 @@ const ProjectsService = {
         'authorization': `bearer ${TokenService.getAuthToken()}`,
         'content-type': 'application/json',
       }})
-      .then(res => !res.ok ? res.json().then(e => Promise.reject(e)) : res.json())
+      .then(res => !res.ok ? res.json().then(Promise.reject) : res.json())
       .then(res => routerProps.history.push(`/projects/${res.id}`))
       .catch(err => console.error(err))
   },

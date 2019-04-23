@@ -29,7 +29,7 @@ export const EventsProvider = props => {
   }, [])
 
   useEffect(() => {
-    const pushToState = data => {
+    const updateState = data => {
       setState({
         ...state,
         requests: {
@@ -38,7 +38,7 @@ export const EventsProvider = props => {
         }
       })
     }
-    RequestsService.getRequestsSse(state.authorized, pushToState)
+    RequestsService.getRequestsSse(state.authorized, updateState)
   }, [state.authorized])
 
   const setAuthorized = authorized => {

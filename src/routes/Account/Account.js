@@ -28,7 +28,7 @@ const Account = props => {
     TokenService.clearAuthToken()
     setAuthorized(false)
     props.history.push('/account')
-    window.location.reload() // TODO #4: closes EventsSource !bad
+    window.location.reload() // TODO #4: close connection - EventsSource
   }
 
   return (

@@ -39,9 +39,9 @@ HeaderBtn.propTypes = {
 
 export const CustomLoader = props => {
   const loaderProps = {
-    width: "30px",
+    width: props.width || "30px",
     type: "ThreeDots",
-    color: "var(--main-color)",
+    color: props.color || "var(--main-color)",
   }
 
   return (
@@ -51,10 +51,19 @@ export const CustomLoader = props => {
   )
 }
 
+export const LoaderFull = props => {
+  return (
+    <div className={styles.loadingWrapper}>
+      <CustomLoader className={styles.loading} width='5rem'/>
+    </div>
+  )
+}
+
 export const Input = props => {
   return (
     <div className={styles.inputContainer}>
       <input
+        autoComplete={props.autoComplete}
         required={!!props.required}
         placeholder={props.placeholder}
         type={props.type}
@@ -189,7 +198,7 @@ export const Dot = props => {
 export const Error = props => {
   return !props.error ? '' : (
     <div className={styles.error}>
-      <span>{props.msg || 'Something went wrong. Please try to go back or refresh the page'}</span>
+      <span>{props.error.error + '. Please try again' || 'Something went wrong. Please try to go back or refresh the page'}</span>
     </div>
   )
 }

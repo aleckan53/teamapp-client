@@ -3,6 +3,7 @@
   height: 68vh;
   position: relative;
   overflow: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 
 .scrollable::-webkit-scrollbar{

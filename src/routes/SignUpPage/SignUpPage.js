@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import AuthApiService from '../../services/AuthApiService'
-import { Header, Msg, Form, Btn, TextArea, Input } from '../../components/Basic/Basic'
+import { Header, Msg, Form, Btn, TextArea, Input, Error } from '../../components/Basic/Basic'
 import { Link } from 'react-router-dom'
 import styles from './SignUpPage.module.css'
 
 const SignUpPage = props => {
 
+  const [error, setError] = useState(null)
   const [state, setState] = useState({
     email: '',
     password: '',
@@ -13,7 +14,6 @@ const SignUpPage = props => {
     last_name: '',
     avatar: [],
   })
-
   const [valid, setValid] = useState({
     email: false,
     password: false,
@@ -47,7 +47,7 @@ const SignUpPage = props => {
           props.history.push('/login')
         }
       }) 
-      .catch(err => console.log(err))
+      .catch(setError)
   }
 
   return (
@@ -59,6 +59,7 @@ const SignUpPage = props => {
         id="signUpForm"
         onSubmit={e => handleSubmit(e)}>
         <Input
+          autoComplete='email'
           required
           placeholder="Email *"
           value={state.email}
@@ -67,6 +68,7 @@ const SignUpPage = props => {
           onChange={e => setState({...state, email: e.target.value})}/>
         <Input
           required
+          autoComplete='new-password'
           placeholder="Password *"
           value={state.password}
           id="password"
@@ -104,6 +106,7 @@ const SignUpPage = props => {
         <Link to='/login'>
           <Msg text='Log in'/>
         </Link>
+        <Error error={error}/>
       </Form>
     </section>
   )

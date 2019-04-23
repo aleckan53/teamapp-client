@@ -49,6 +49,7 @@ export const ThemeProvider = (props) => {
     boxShadow: '--box-shadow: rgba(169,169,169,0.3)',
     color1: '--color1: blue',
     color2: '--color2: green',
+    altColor: '--alt-color: #257aa6',
   }
 
   const darkTheme = {
@@ -67,6 +68,7 @@ export const ThemeProvider = (props) => {
     boxShadow: '--box-shadow: rgba(0,0,0,0.3)',
     color1: '--color1: #EF8354',
     color2: '--color2: #3AAD4E',
+    altColor: '--alt-color: #ff2e63',
   }
 
   return (
