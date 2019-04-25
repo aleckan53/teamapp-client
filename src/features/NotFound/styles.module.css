@@ -1,0 +1,7 @@
+.fourOfour {
+  text-align: center;
+  margin-top: 2rem;
+}
+.fourOfour h1 {
+  color: var(--main-color);
+}

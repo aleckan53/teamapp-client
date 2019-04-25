@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Account component Given no requests renders a message 1`] = `
+<section
+  className="Requests"
+>
+  <header
+    className="header"
+  >
+    <h1
+      className="h1"
+    >
+      Requests
+    </h1>
+  </header>
+  
+  
+  <p
+    className="msg"
+  >
+    New requests appear here
+  </p>
+</section>
+`;

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import TokenService from '../services/TokenService'
-import RequestsService from '../services/RequestsService'
+import TokenService from 'services/TokenService'
+import RequestsService from 'services/RequestsService'
 
 const EventsContext = React.createContext({
   authorized: false,

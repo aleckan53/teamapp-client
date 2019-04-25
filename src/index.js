@@ -1,11 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import App from './components/App/App'
+import App from 'App'
 import { BrowserRouter as Router } from 'react-router-dom'
-import { ProjectsProvider } from './context/ProjectsContext'
-import { ThemeProvider } from './context/ThemeContext'
-import { EventsProvider } from './context/EventsContext' 
-import './index.css'
+import { ProjectsProvider } from 'context/ProjectsContext'
+import { ThemeProvider } from 'context/ThemeContext'
+import { EventsProvider } from 'context/EventsContext' 
+import 'index.css'
 
 ReactDOM.render(
   <Router>

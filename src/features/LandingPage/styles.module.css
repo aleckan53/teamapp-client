@@ -1,0 +1,203 @@
+.version {
+  color: var(--color2);
+  position: absolute;
+  top: 4%;
+  left: 5%;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: .85rem;
+}
+
+.landingPage > header {
+  position: relative;
+  box-shadow: 0px 5px 40px -2px var(--box-shadow);
+}
+
+.landingPage section {
+  font-size: 1.4rem;
+  line-height: 1.5
+}
+
+@media (min-width: 500px) {
+  .landingPage > header {
+    margin-top: -1%;
+  }
+  .version {
+    margin-top: 1rem;
+    left: 10%;
+  }
+}
+
+.hero {
+  background-image: linear-gradient(rgba(0,0,0,0) 65%, rgba(0,0,0,.8) 100%), url('./img/main.png');
+  background-size: 150%;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 400px;
+}
+
+@media (min-width: 1100px) {
+  .hero {
+    background-size: 100%;
+  }
+}
+
+.btnContainer {
+  position: absolute;
+  display: flex;
+  width: 40%;
+  justify-content: space-between;
+  top: 2%;
+  right: 5%;
+}
+
+@media (min-width: 500px) {
+  .btnContainer {
+    margin-top: 1rem;
+    right: 10%;
+  }
+}
+
+.btn {
+  font-size: .7rem;
+  width: 45%;
+  height: 2rem;
+  text-align: center;
+  padding: 9px 0;
+}
+
+@media (min-width: 700px) {
+  .btnContainer {
+    width: 30%;
+  }
+  .btn {
+    margin-top: auto;
+    margin-left: auto;
+    right: 10%;
+  }
+}
+
+.btn:hover {
+  transform: scale(1.1,1.1)
+}
+
+.titleContainer {
+  position: absolute;
+  bottom: 0;
+  left: 5%;
+}
+
+@media (min-width: 500px) {
+  .titleContainer {
+    left: 10%;
+  }
+}
+
+@media (min-width: 1100px) {
+  .btnContainer {
+    right: 25%;
+    width: 25%;
+  }
+  .titleContainer {
+    left: 25%;
+  }
+  .version {
+    left: 25%;
+  }
+}
+
+@media (min-width: 1500px) {
+  .btnContainer {
+    right: 32%;
+    width: 20%;
+  }
+  .titleContainer {
+    left: 32%;
+  }
+  .version {
+    left: 32%;
+  }
+}
+
+.titleContainer h1 {
+  color: var(--sub-text);
+  margin-bottom: .4rem;
+}
+
+.titleContainer h2 {
+  color: var(--main-color);
+  margin-top: 0;
+  font-size: 1.3rem;
+}
+
+.landingPage img {
+  width: 100%;
+  height: 100%;
+}
+
+.landingPage h3 {
+  color: var(--main-text);
+}
+
+.guestMsg {
+  color: var(--main-color);
+  font-size: 1rem;
+  text-align: center;
+}
+
+.guestBtn {
+  margin-top: .5rem;
+}
+
+.landingPage ul, ol{
+  padding-left: 25px;
+  color: var(--main-text);
+  list-style: none;
+  font-weight: 600
+}
+
+.landingPage ul li::before {
+  content: "\2022";
+  color: var(--main-color);
+  font-weight: bold;
+  display: inline-block;
+  width: 1em;
+  margin-left: -25px;
+}
+
+.landingPage ol li {
+  counter-increment: default;
+}
+.landingPage ol li::before {
+  content: counter(default) ". ";
+  color: var(--main-color);
+  font-weight: bold;
+  margin-left: -25px;
+  margin-right: 10px;
+}
+
+.landingPage a {
+  color: var(--main-text)
+}
+
+.landingPage li {
+  margin: 5px 0;
+}
+
+footer {
+  margin-top: 2rem;
+  height: 60px;
+  border-top: .6px solid var(--box-shadow);
+  text-align: center;
+  padding: 40px 0 0;
+  font-size: .7rem
+}
+
+.landingPage button {
+  margin-bottom: 3rem;
+}
+
+.landingPage button:hover {
+  box-shadow:0px 0px 10px var(--main-color);
+}
+
