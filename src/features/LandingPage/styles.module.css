@@ -149,7 +149,7 @@
   margin-top: .5rem;
 }
 
-.landingPage ul, ol{
+.landingPage ul {
   padding-left: 25px;
   color: var(--main-text);
   list-style: none;
@@ -163,17 +163,6 @@
   display: inline-block;
   width: 1em;
   margin-left: -25px;
-}
-
-.landingPage ol li {
-  counter-increment: default;
-}
-.landingPage ol li::before {
-  content: counter(default) ". ";
-  color: var(--main-color);
-  font-weight: bold;
-  margin-left: -25px;
-  margin-right: 10px;
 }
 
 .landingPage a {

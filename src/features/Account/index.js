@@ -17,7 +17,7 @@ const Account = props => {
     about: '',
     links: [],
   })
-  
+
   useEffect(() => {
     Api.getUserInfo(setState)
   }, [])
@@ -41,6 +41,8 @@ const Account = props => {
     </div>
   )
 }
+
+
 
 export default Account
 

@@ -16,7 +16,7 @@ const LandingPage = props => {
   return  <>
     {loading ? <LoaderFull/> : ''}
     <div className={styles.landingPage}>
-      <header className={styleMedia.header}>
+      <header className={styles.header}>
         <div className={styles.hero}>
         </div>
         <span className={styles.version}>v 0.1 <strong>Beta</strong></span>
@@ -64,12 +64,12 @@ const LandingPage = props => {
           <p>
             Simple!
           </p>
-          <ol>
+          <ul>
             <li>Sign up for an account</li>
             <li>Set up a profile</li>
             <li>Create / Join a project</li>
             <li>Collaborate with a team</li>
-          </ol>
+          </ul>
           <img src={require('./img/join_demo.png')} alt='join a project demo'/>
         </section>
         <section>
