@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useLayoutEffect, useState } from 'react'
 
 const ThemeContext = React.createContext({
   dark: false,
@@ -12,7 +12,7 @@ export const ThemeProvider = (props) => {
     dark: false,
   })  
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const currentDark = window.localStorage.getItem('dark')==='true'
     setState({...state, dark: currentDark})
 
